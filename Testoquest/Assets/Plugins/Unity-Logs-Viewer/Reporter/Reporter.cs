@@ -352,8 +352,6 @@ public class Reporter : MonoBehaviour
 			DestroyImmediate(gameObject, true);
 			return;
 		}
-
-
 		//initialize gui and styles for gui purpose
 
 		clearContent = new GUIContent("", images.clearImage, "Clear logs");
@@ -1954,21 +1952,6 @@ public class Reporter : MonoBehaviour
 		}
 	}
 
-	//new scene is loaded
-	void OnLevelWasLoaded()
-	{
-		if (clearOnNewSceneLoaded)
-			clear();
-
-#if UNITY_CHANGE3
-		currentScene = SceneManager.GetActiveScene().name ;
-		Debug.Log( "Scene " + SceneManager.GetActiveScene().name + " is loaded");
-#else
-		currentScene = Application.loadedLevelName;
-		Debug.Log("Scene " + Application.loadedLevelName + " is loaded");
-#endif
-	}
-
 	//save user config
 	void OnApplicationQuit()
 	{
@@ -2008,18 +1991,6 @@ public class Reporter : MonoBehaviour
 			if (streamingAssetsPath == "")
 				streamingAssetsPath = Application.dataPath + "/StreamingAssets/";
 			url = System.IO.Path.Combine(streamingAssetsPath, prefFile);
-		}
-
-
-		// float startTime = Time.realtimeSinceStartup;
-		WWW www = new WWW(url);
-		yield return www;
-
-		if (!string.IsNullOrEmpty(www.error)) {
-			Debug.LogError(www.error);
-		}
-		else {
-			buildDate = www.text;
 		}
 
 		yield break;
