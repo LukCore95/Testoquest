@@ -1,0 +1,25 @@
+fileFormatVersion: 2
+guid: 79803ae4da7c8db41b926941a79560f6
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Hussar Simple
+  fontNames:
+  - Hussar Simple
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 1ec792fb93ee81049b4fc5a8dd26b182, type: 3}
+  - {fileID: 12800000, guid: 1a0a5e3c68edfee4aabc0cb4bdc00da7, type: 3}
+  - {fileID: 12800000, guid: 090457af203705e4f842a631af6b5bde, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
