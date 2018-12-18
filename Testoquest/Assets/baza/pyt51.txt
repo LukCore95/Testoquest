@@ -1,0 +1,6 @@
+X1010
+51. Przetwarzanie wstepne jezyka naturalnego w systemie syntezy mowy ma za zadanie
+normalizacje tekstu, tj. sprowadzenia do jednolitej formy
+tagowanie czesci mowy
+fonetyzacje, tj. zamiane poszczegolnych slow na sekwencje fonemow
+organizacje zdan wejsciowych w grupy powiazanych slow

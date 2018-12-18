@@ -1,0 +1,6 @@
+X0101
+14. Co przechowuje sie w slownikach wymowy
+Ciagi grafemow
+Ciagi fonemow
+Ciagi symboli alfabetu fonetycznego IPA
+Miejsce akcentu wyrazowego

@@ -49,10 +49,10 @@ namespace GracesGames.SimpleFileBrowser.Scripts.UI {
 		private FileBrowser _fileBrowser;
 
 		// Button used to select a file to save/load
-		private GameObject _selectFileButton;
+		public GameObject SelectFileButton;
 
 		// Game object that represents the current path
-		private GameObject _pathText;
+		public GameObject PathText;
 
 		// Game object and InputField that represents the name of the file to save
 		private GameObject _saveFileText;
@@ -101,7 +101,7 @@ namespace GracesGames.SimpleFileBrowser.Scripts.UI {
 			// Hook up CloseFileBrowser method to CloseFileBrowserButton
 			Utilities.FindButtonAndAddOnClickListener("CloseFileBrowserButton", _fileBrowser.CloseFileBrowser);
 			// Hook up SelectFile method to SelectFileButton
-			_selectFileButton = Utilities.FindButtonAndAddOnClickListener("SelectFileButton", _fileBrowser.SelectFile);
+			SelectFileButton = Utilities.FindButtonAndAddOnClickListener("SelectFileButton", _fileBrowser.SelectFile);
 		}
 
 		// Setup path, load and save file text
@@ -111,7 +111,7 @@ namespace GracesGames.SimpleFileBrowser.Scripts.UI {
 			GameObject fileLabel = Utilities.FindGameObjectOrError("FileLabel");
 
 			// Find pathText game object to update path on clicks
-			_pathText = Utilities.FindGameObjectOrError("PathText");
+			PathText = Utilities.FindGameObjectOrError("PathText");
 			// Find loadText game object to update load file text on clicks
 			_loadFileText = Utilities.FindGameObjectOrError("LoadFileText");
 
@@ -127,7 +127,7 @@ namespace GracesGames.SimpleFileBrowser.Scripts.UI {
 			}
 
 			fileLabel.GetComponent<Text>().fontSize = PanelTextFontSize;
-			_pathText.GetComponent<Text>().fontSize = PanelTextFontSize;
+			PathText.GetComponent<Text>().fontSize = PanelTextFontSize;
 			_loadFileText.GetComponent<Text>().fontSize = PanelTextFontSize;
 			foreach (Text textComponent in _saveFileText.GetComponentsInChildren<Text>()) {
 				textComponent.fontSize = PanelTextFontSize;
@@ -158,12 +158,12 @@ namespace GracesGames.SimpleFileBrowser.Scripts.UI {
 
 		// Toggles the SelectFileButton to ensure valid file names during save
 		public void ToggleSelectFileButton(bool enable) {
-			_selectFileButton.SetActive(enable);
+			SelectFileButton.SetActive(enable);
 		}
 
 		// Update the path text
 		public void UpdatePathText(string newPath) {
-			_pathText.GetComponent<Text>().text = newPath;
+			PathText.GetComponent<Text>().text = newPath;
 		}
 
 		// Update the file to load text
@@ -185,7 +185,7 @@ namespace GracesGames.SimpleFileBrowser.Scripts.UI {
 		public void SetSaveMode(string defaultName, string fileExtension) {
 			_saveFileText.SetActive(true);
 			_loadFileText.SetActive(false);
-			_selectFileButton.GetComponent<Image>().sprite = SaveImage;
+			SelectFileButton.GetComponent<Image>().sprite = SaveImage;
 			// Update the input field with the default name and file extension
 			SetFileNameInputField(defaultName, fileExtension);
 		}
@@ -193,7 +193,7 @@ namespace GracesGames.SimpleFileBrowser.Scripts.UI {
 		// Set the UI to load move
 		public void SetLoadMode() {
 			_loadFileText.SetActive(true);
-			_selectFileButton.GetComponent<Image>().sprite = LoadImage;
+			SelectFileButton.GetComponent<Image>().sprite = LoadImage;
 			_saveFileText.SetActive(false);
 		}
 

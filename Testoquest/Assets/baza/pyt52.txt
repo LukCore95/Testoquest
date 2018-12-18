@@ -1,0 +1,6 @@
+X0001
+52. Modelowanie akustyczne opera sie na nastepujacych zalozeniach
+kolejne wektory cech wyekstrahowane z sygnalu akustyczne sa statystycznie zalezne
+model Markova drugiego i trzeciego rzedu najlepiej oddaje zjawiska zachodzace w sygnale mowy
+obserwacje sa niezalezne i maja jednakowy rozklad prawdopodobienstwa
+przejscie do kolejnego stanu HMM zalezy wylacznie od biezacego stanu

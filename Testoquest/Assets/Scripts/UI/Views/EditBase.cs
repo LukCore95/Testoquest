@@ -13,4 +13,9 @@ public class EditBase : UIView
 	{
 		throw new System.NotImplementedException();
 	}
+
+	public void SetEditBase(QuestionDataBase contentElementQuestionDataBase)
+	{
+		throw new System.NotImplementedException();
+	}
 }

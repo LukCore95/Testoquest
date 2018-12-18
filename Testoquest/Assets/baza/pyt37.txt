@@ -1,0 +1,6 @@
+X1101
+37. Wskaz skladowe systemu rozpoznawania mowy:
+ekstrakcja cech FE
+model akustyczny AM
+model wymowy PM
+dekodowanie D

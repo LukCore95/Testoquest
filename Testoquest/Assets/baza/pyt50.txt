@@ -1,0 +1,6 @@
+X1010
+50. Systemy wielomodalne charakteryzuja sie
+komplementarnoscia
+idealna synchronizacja miedzy wszystkimi modalnosciami
+wieksza wiarygodnosc w stosunku do systemow jedno-modalnych
+praktycznie zerowa redundancja danych

@@ -4,16 +4,22 @@ using UnityEngine;
 
 public class UIManager : Singleton<UIManager>
 {
+	public Background Background;
+
 	[SerializeField] private List<UIView> _views = new List<UIView>();
 	[SerializeField] private List<UIView> _viewsHistory = new List<UIView>();
 
-	private void SetView(UIView viewToSet)
+	public void GoToView(UIView viewToSet)
 	{
 		foreach (var uiView in _views)
 		{
 			if (uiView != viewToSet)
 			{
 				uiView.gameObject.SetActive(false);
+			}
+			else
+			{
+				uiView.gameObject.SetActive(true);
 			}
 		}
 		viewToSet.gameObject.SetActive(true);
@@ -27,7 +33,12 @@ public class UIManager : Singleton<UIManager>
 			_viewsHistory.RemoveAt(_viewsHistory.Count-1);
 		}
 
-		SetView(_viewsHistory[_viewsHistory.Count - 1]);
+		GoToView(_viewsHistory[_viewsHistory.Count - 1]);
+	}
+
+	private void ResetHistory()
+	{
+
 	}
 
 	private void AddViewToHistory(UIView viewToAdd)
@@ -39,5 +50,10 @@ public class UIManager : Singleton<UIManager>
 				_viewsHistory.Add(viewToAdd);
 			}
 		}
+		else
+		{
+			_viewsHistory.Add(viewToAdd);
+		}
 	}
+
 }

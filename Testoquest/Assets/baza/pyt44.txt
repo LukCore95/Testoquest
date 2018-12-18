@@ -1,0 +1,6 @@
+X0001
+44. Zadaniem modelu jezyka jest:
+oszacowanie prawdopodobienstwa wypowiedzenia dowolnego slowa w danym jezyku naturalnym
+oszacowanie prawdopodobienstwa wypowiedzenia konkretnego slowa w danym jezyku naturalnym
+oszacowanie prawdopodobienstwa tego, ze na wejsciu systemu ASR pojawi okreslona sekwencja slow
+oszacowanie prawdopodobienstwa tego, ze wypowiedziano slowo pod warunkiem ze wczesniej wypowiedziano n innych slow

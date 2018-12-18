@@ -1,0 +1,6 @@
+X1110
+13. Na czym polega normalizacja tekstu w systemach syntezy mowy
+Podziale tekstu na zdania
+Rozwijaniu skrotowcow
+Zamianie liczb na tekst
+Wyszukiwaniu nazw wlasnych

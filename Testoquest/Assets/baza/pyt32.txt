@@ -1,0 +1,7 @@
+X1110
+32. W systemach ASR ekstrakcja cech polega na przetworzeniu sygnalu mowy, by:
+wyodrebnione cechy reprezentowaly najwazniejsze informacje z punktu widzenia rozpoznawania mowy
+uzyskac zwiezla reprezentacje sygnalu
+pozbyc sie informacji redundantnych
+zachowac wszystkie informacje przenoszone przez sygnal mowy
+

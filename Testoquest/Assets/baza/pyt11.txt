@@ -1,0 +1,6 @@
+X1000
+11. W ukrytych modelach Markowa prawdopodobienstwo, z jakim gloska moze byc poczatkiem nowego wyrazu okreslone jest
+Prawdopodobienstwem przejsc miedzy stanami
+Prawdopodobienstwem poczatkowym stanow
+Prawdopodobienstwem wyslania symbolu w okreslonym stanie
+Prawdopodobienstwem wystepowania wyrazu w slowniku

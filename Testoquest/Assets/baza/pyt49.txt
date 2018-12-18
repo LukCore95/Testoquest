@@ -1,0 +1,6 @@
+X1000
+49. Jakie poziomy inicjatywy wystepuja w modelowaniu dialogu
+inicjatywa mieszana
+porownanie przez uzytkownika
+porownanie przez system
+brak inicjatywy

@@ -1,0 +1,6 @@
+X1100
+24. W problemie rozpoznawania mowy opisanym rownaniem: "W = arg max P(O|W)P(W)":
+P(O | W) jest modelem akustycznym
+P(W) jest modelem jezyka
+P(W) jest modelem akustycznym
+P(O | W) jest modelem jezyka

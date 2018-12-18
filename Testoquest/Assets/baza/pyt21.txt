@@ -1,0 +1,6 @@
+X1101
+21. Ktore problemy rozwiazywane sa w ramach analizy fonetycznej
+Tworzenie slownikow wymowy
+Wyszukiwanie nazw wlasnych
+Wyszukiwanie konca zdania
+Zamiana grafemow na fonemy

@@ -42,7 +42,7 @@ namespace GracesGames.SimpleFileBrowser.Scripts {
 		// ----- PRIVATE UI ELEMENTS ------
 
 		// The user interface script for the file browser
-		private UserInterface _uiScript;
+		public UserInterface UIScript;
 
 		// Boolean to keep track whether the file browser is open
 		private bool _isOpen;
@@ -98,8 +98,8 @@ namespace GracesGames.SimpleFileBrowser.Scripts {
 				GameObject userIterfacePrefab =
 					ViewMode == ViewMode.Portrait ? FileBrowserPortraitUiPrefab : FileBrowserLandscapeUiPrefab;
 				GameObject fileBrowserUi = Instantiate(userIterfacePrefab, uiCanvas.transform, false);
-				_uiScript = fileBrowserUi.GetComponent<UserInterface>();
-				_uiScript.Setup(this);
+				UIScript = fileBrowserUi.GetComponent<UserInterface>();
+				UIScript.Setup(this);
 			} else {
 				Debug.LogError("Make sure there is a canvas GameObject present in the Hierarcy (Create UI/Canvas)");
 			}
@@ -221,7 +221,7 @@ namespace GracesGames.SimpleFileBrowser.Scripts {
 		public void SelectFile() {
 			// When saving, send the path and new file name, else the selected file
 			if (_mode == FileBrowserMode.Save) {
-				string inputFieldValue = _uiScript.GetSaveFileText();
+				string inputFieldValue = UIScript.GetSaveFileText();
 				// Additional check for invalid input field value
 				// Should never be true due to onValueChanged check with toggle on save button
 				if (String.IsNullOrEmpty(inputFieldValue)) {
@@ -243,7 +243,7 @@ namespace GracesGames.SimpleFileBrowser.Scripts {
 
 		// Checks the current value of the InputField. If it is an empty string, disable the save button
 		public void CheckValidFileName(string inputFieldValue) {
-			_uiScript.ToggleSelectFileButton(inputFieldValue != "");
+			UIScript.ToggleSelectFileButton(inputFieldValue != "");
 		}
 
 		// Updates the search filter and filters the UI
@@ -256,19 +256,19 @@ namespace GracesGames.SimpleFileBrowser.Scripts {
 		private void UpdateFileBrowser(bool topLevel = false) {
 			UpdatePathText();
 			UpdateLoadFileText();
-			_uiScript.ResetParents();
+			UIScript.ResetParents();
 			BuildDirectories(topLevel);
 			BuildFiles();
 		}
 
 		// Updates the path text
 		private void UpdatePathText() {
-			_uiScript.UpdatePathText(_currentPath);
+			UIScript.UpdatePathText(_currentPath);
 		}
 
 		// Updates the file to load text
 		private void UpdateLoadFileText() {
-			_uiScript.UpdateLoadFileText(_currentFile);
+			UIScript.UpdateLoadFileText(_currentFile);
 		}
 
 		// Creates a DirectoryButton for each directory in the current path
@@ -294,7 +294,7 @@ namespace GracesGames.SimpleFileBrowser.Scripts {
             // For each directory in the current directory, create a DirectoryButton and hook up the DirectoryClick method
             foreach (string dir in directories) {
 				if (Directory.Exists(dir)) {
-					_uiScript.CreateDirectoryButton(dir);
+					UIScript.CreateDirectoryButton(dir);
 				}
 			}
 		}
@@ -332,10 +332,10 @@ namespace GracesGames.SimpleFileBrowser.Scripts {
 				if (!File.Exists(file)) return;
 				// Hide files (no button) with incompatible file extensions when enabled
 				if (!HideIncompatibleFiles)
-					_uiScript.CreateFileButton(file);
+					UIScript.CreateFileButton(file);
 				else {
 					if (CompatibleFileExtension(file)) {
-						_uiScript.CreateFileButton(file);
+						UIScript.CreateFileButton(file);
 					}
 				}
 			}
@@ -382,7 +382,7 @@ namespace GracesGames.SimpleFileBrowser.Scripts {
 			if (_mode == FileBrowserMode.Save) {
 				string clickedFileName = Path.GetFileNameWithoutExtension(clickedFile);
 				CheckValidFileName(clickedFileName);
-				_uiScript.SetFileNameInputField(clickedFileName, _fileExtensions[0]);
+				UIScript.SetFileNameInputField(clickedFileName, _fileExtensions[0]);
 			} else {
 				_currentFile = clickedFile;
 			}
@@ -400,7 +400,7 @@ namespace GracesGames.SimpleFileBrowser.Scripts {
 			}
 
 			_mode = FileBrowserMode.Save;
-			_uiScript.SetSaveMode(defaultName, fileExtensions[0]);
+			UIScript.SetSaveMode(defaultName, fileExtensions[0]);
 			FilePanel(fileExtensions);
 		}
 
@@ -413,7 +413,7 @@ namespace GracesGames.SimpleFileBrowser.Scripts {
 			}
 
 			_mode = FileBrowserMode.Load;
-			_uiScript.SetLoadMode();
+			UIScript.SetLoadMode();
 			FilePanel(fileExtensions);
 		}
 

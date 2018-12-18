@@ -1,0 +1,6 @@
+X1000
+46. W modelowaniu jezyka wykorzystuje sie
+n-gramy
+ukryty lancuch Markova HMM
+korpus jezyka mowionego
+wielowymiarowy rozklad Gaussa GMM

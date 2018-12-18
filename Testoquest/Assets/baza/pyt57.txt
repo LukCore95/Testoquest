@@ -1,0 +1,7 @@
+X1000
+61. W modelowaniu jezyka na potrzeby ASR wykorzystuje sie:
+n-gramy
+korpus roznorodnych tekstow w danym jezyku naturalnym
+wielowymiarowy rozklad Gaussa (GMM - ang. Gaussian Mixture Model)
+programowanie dynamiczne (ang. Dynamic Programming)
+

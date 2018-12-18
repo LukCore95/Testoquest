@@ -1,0 +1,6 @@
+X1010
+45. Zaznacz sformulowania ktore charakteryzuja synteze konkatenacyjna
+najwiekszym problemem w syntezie konkatenacyjnej jest modyfikacja prozodii
+baza danych tworzona jest na podstawie zestawu odpowiednio dobranych slow, czytanych przez dowolna osobe
+podstawe syntezy konkatenacyjnej stanowi baza danych difonow
+na podstawie nazw fonemo, czasow ich trwania oraz wysokosci, syntezator wyszukuje i laczy poszczegolne difony w wypowiedz wynikowa

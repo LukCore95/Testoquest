@@ -1,0 +1,6 @@
+X1011
+43. Ktore podejscia stosuje sie do wykrywania i sledzenia cech dloni:
+metody oparte na modelu
+metody wykorzystujace narzedzia opracowane dla Human Motion Capture z przegubowymi modelami ciala
+metody wykorzystujace dwu-wymiarowy model wygladu dloni
+metody oparte na wygladzie

@@ -1,0 +1,6 @@
+X1001
+27. W procesie dekodowania wykorzystuje sie
+algorytm Viterbi
+algorytm przeszukiwania grafu w glab
+algorytm wyszukiwania najkrotszej sciezki w grafie (algorytm Djikstry)
+programowanie dynamiczne

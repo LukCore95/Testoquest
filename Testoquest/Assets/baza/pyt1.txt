@@ -1,0 +1,6 @@
+X0001
+1. Relacja gloska-litera jest relacja typu:
+1 : 1,
+1 : wielu,
+wiele : 1
+wiele : wielu

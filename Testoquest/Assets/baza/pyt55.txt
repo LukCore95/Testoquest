@@ -1,0 +1,7 @@
+X1110
+56. Zadaniem menadzera dialogu w systemach dialogowych jest:
+modelowanie dyskusji
+modelowanie struktury dialogu
+modelowanie postepu rozmowy w czasie
+modelowanie emocji uzytkownika
+

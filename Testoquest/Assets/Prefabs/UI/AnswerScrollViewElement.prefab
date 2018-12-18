@@ -85,6 +85,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6057246582721793987}
   - component: {fileID: 2310121225381979422}
+  - component: {fileID: 6128027548656088606}
   m_Layer: 5
   m_Name: AnswerScrollViewElement
   m_TagString: Untagged
@@ -133,6 +134,25 @@ MonoBehaviour:
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
+--- !u!114 &6128027548656088606
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1423835883737891864}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 148d8be908e1b234abf1629af851e429, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Answer:
+    AnswerText: 
+    IsCorrect: 0
+  AnswerToggle: {fileID: 5557979664318628610}
+  BackgroundImage: {fileID: 850801209730370069}
+  AnswerText: {fileID: 7051246002989303449}
+  IsSelected: 0
 --- !u!1 &1589703059060257335
 GameObject:
   m_ObjectHideFlags: 0
@@ -369,7 +389,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.Toggle+ToggleEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
-  m_IsOn: 1
+  m_IsOn: 0
 --- !u!1 &8736383867860525447
 GameObject:
   m_ObjectHideFlags: 0

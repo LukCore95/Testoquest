@@ -1,0 +1,7 @@
+X0001
+54. Istota modelowania akustycznego polega na tym, by na podstawie sekwencji obserwacji pochodzacych z etapu ekstrakcji cech znalezc:
+znalezc tylko takie sekwencje slow wypowiedzianych na wejsciu systemu, ktorych prawdopodobienstwo jest wieksze lub rowne pewnej wartosci progowej
+wszystkie mozliwe sekwencje slow, ktore zostaly wypowiedziane na wejsciu systemu
+znalezc wylacznie sekwencje slow wypowiedziane przez jednego, okreslonego mowce
+najbardziej prawdopodobna sekwencje slow, ktore zostala wypowiedziana na wejsciu systemu
+

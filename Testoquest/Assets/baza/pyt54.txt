@@ -1,0 +1,7 @@
+X0111
+55. Metody automatycznego wykrywania i sledzenia cech twarzy (oczy, usta, brwi, kontur twarzy) wewnatrz obszaru zidentyfikowanego, jako twarz mozna podzielic na: 
+systemy oparte na tzw. twarzach wlasnych (ang. eigenfaces)
+systemy hybrydowe
+systemy stosujace wykrywanie ogolnego modelu twarzy
+systemy wykorzystujace lokalne wykrywanie cech
+

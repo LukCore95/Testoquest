@@ -1,0 +1,6 @@
+X1011
+22. Zamiana grafemow na fonemy
+Realizowana jest dla slow, ktorych nie ma w slowniku
+Wykorzystywana jest automatycznie z uzyciem regul fonologicznych
+Dokonywana jest z wykorzystaniem uczenia maszynowego
+Wymaga rozwiazania problemu wyrownania grafemu z gloskami

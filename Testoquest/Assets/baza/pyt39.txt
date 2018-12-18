@@ -1,0 +1,6 @@
+X1000
+39. Ktore z ponizszych stwierdzen sa prawdziwe
+na generowanie jezyka naturalnego skladaja sie trzy etapy: planowanie dokumentu, mikroplanowanie, realizacja powierzchniowa
+generowanie jezyka naturalnego ma na celu wytworzenie zrozumialego tekstu na podstawie poza treningowych reprezentacji informacji i pojec
+planowanie dokumentu i makroplanowanie zaleza od konkretnego jezyka naturalnego
+realizacja zewnetrzna jest niezalezna od jezyka docelowego

@@ -1,0 +1,7 @@
+X0111
+60. Wskaz skladowe systemu rozpoznawania mowy:
+rozumienie jezyka mowionego (SLU - ang. Spoken Language Understanding)
+model akustyczny (AM - ang. Acoustic Model)  
+model wymowy (PM - ang. Pronounciation Model)
+model jezyka (LM - ang. Language Model)
+

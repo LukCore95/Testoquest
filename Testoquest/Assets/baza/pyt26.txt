@@ -1,0 +1,6 @@
+X1101
+26. Ukryty lancuch Markowa definiuja
+Zbior stanow
+Prawdopodobienstwa przejsc miedzy stanami
+Poczatkowe prawdopodobienstwa stanow
+Prawdopodobienstwa wyslania symbolu w okreslonym stanie

@@ -1,0 +1,7 @@
+X11111
+5. Podaj wlasciwa kolejnosc elementow skladajacych sie na model zaszumionego kanalu reprezentujacy system rozpoznawania mowy
+Zaszumione zdanie 3 
+Zaszumiony kanal 2 
+Dekoder 4
+Dekodowane zdanie 1
+Odgadniete zdanie 5
