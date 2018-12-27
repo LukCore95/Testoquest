@@ -42,6 +42,13 @@ public class YesOrNo : UIView
 
 	public void SetFromChooseBaseDeleteButton(QuestionDataBase contentElementQuestionDataBase)
 	{
-		throw new System.NotImplementedException();
+		ResetButtons();
+		_questionText.text = "Czy na pewno chcesz usunąć bazę " + contentElementQuestionDataBase.Name + "? To usunie tylko bazę z aplikacji, folder z bazą pozostanie na telefonie.";
+		_noButton.onClick.AddListener(UIManager.Instance.GoBack);
+		_yesButton.onClick.AddListener(delegate
+		{
+			QuestionDataBaseManager.Instance.DeleteDataBase(contentElementQuestionDataBase.Name);
+			UIManager.Instance.GoBack();
+		});
 	}
 }

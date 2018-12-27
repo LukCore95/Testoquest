@@ -1,6 +1,0 @@
-X1011
-42. Wykaz skladowe systemu rozpoznawania mowy: - str. 28
-model akustyczny AM
-rozumienie jezyka mowionego SLU
-model jezyka LM
-model wymowy PM

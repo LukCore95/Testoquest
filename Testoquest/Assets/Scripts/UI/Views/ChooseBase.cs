@@ -40,6 +40,7 @@ public class ChooseBase : UIView
 
 	private void ClearScrollView()
 	{
+		Debug.Log("Clearing Scroll view");
 		foreach (Transform child in Content.transform)
 		{
 			Destroy(child.gameObject);

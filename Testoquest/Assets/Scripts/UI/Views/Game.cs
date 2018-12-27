@@ -7,6 +7,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Random = System.Random;
 
+[Serializable]
 struct QuestionRepeatsStruct
 {
 	public Question Question;
@@ -22,6 +23,7 @@ struct QuestionRepeatsStruct
 public class Game : UIView
 {
 	public Slider EnemyHPSlider;
+	public Text EnemyHPText;
 	public Slider QuestionBaseProgressSlider;
 	public Text TimeSpentText;
 	public Text QuestionBaseProgressText;
@@ -34,15 +36,14 @@ public class Game : UIView
 	public Button ExitButton;
 	public GameObject AnswerContentElementPrefab;
 
-
-	private QuestionDataBase selectedQuestionDataBase;
-	private List<QuestionRepeatsStruct> questionRepeats = new List<QuestionRepeatsStruct>();
-	private Question currentQuestion;
-	private List<AnswerScrollViewElement> currentAnswerElements = new List<AnswerScrollViewElement>();
-	private TimeSpan timeSpent;
-	private double timer;
-	private double timerForAnswer;
-	private float answeredQuestionsNumber;
+	[SerializeField] private QuestionDataBase selectedQuestionDataBase;
+	[SerializeField] private List<QuestionRepeatsStruct> questionRepeats = new List<QuestionRepeatsStruct>();
+	[SerializeField] private Question currentQuestion;
+	[SerializeField] private List<AnswerScrollViewElement> currentAnswerElements = new List<AnswerScrollViewElement>();
+	[SerializeField] private TimeSpan timeSpent;
+	[SerializeField] private double timer;
+	[SerializeField] private double timerForAnswer;
+	[SerializeField] private float answeredQuestionsNumber;
 
 	private void Start()
 	{
@@ -138,12 +139,13 @@ public class Game : UIView
 		StopCoroutine(DecreaseQuestionTimer());
 		int numberOfAnswers = currentQuestion.Answers.Count;
 		int numberOfMatchedAnswers = 0;
+		int repeatsStructIndex =
+			questionRepeats.FindIndex(_struct => _struct.Question == currentQuestion);
+		QuestionRepeatsStruct repeatsStruct = questionRepeats[repeatsStructIndex];
 		foreach (Answer answer in currentQuestion.Answers)
 		{
 			AnswerScrollViewElement answerElement =
 				currentAnswerElements.Find(_answerElement => _answerElement.Answer == answer);
-			QuestionRepeatsStruct repeatsStruct =
-				questionRepeats.Find(_struct => _struct.Question == currentQuestion);
 			if (answerElement.IsSelected == answer.IsCorrect)
 			{
 				numberOfMatchedAnswers++;
@@ -157,21 +159,21 @@ public class Game : UIView
 			{
 				answerElement.BackgroundImage.color = Color.red;
 			}
+		}
 
-			if (numberOfAnswers == numberOfMatchedAnswers)
+		if (numberOfAnswers == numberOfMatchedAnswers)
+		{
+			repeatsStruct.RepeatsLeft--;
+			if (repeatsStruct.RepeatsLeft == 0)
 			{
-				repeatsStruct.RepeatsLeft--;
-				if (repeatsStruct.RepeatsLeft == 0)
-				{
-					questionRepeats.Remove(repeatsStruct);
-					answeredQuestionsNumber++;
-					QuestionDataBaseManager.UpdateQuestionToAnswered(selectedQuestionDataBase,currentQuestion);
-				}
+				questionRepeats.Remove(repeatsStruct);
+				answeredQuestionsNumber++;
+				QuestionDataBaseManager.Instance.UpdateQuestionToAnswered(selectedQuestionDataBase, currentQuestion);
 			}
-			else
-			{
-				repeatsStruct.RepeatsLeft += OptionsManager.Instance.RepeatQuestionsNumber;
-			}
+		}
+		else
+		{
+			repeatsStruct.RepeatsLeft = repeatsStruct.RepeatsLeft + OptionsManager.Instance.RepeatQuestionsNumber;
 		}
 
 		UpdateProgress();
@@ -204,6 +206,7 @@ public class Game : UIView
 		}
 
 		EnemyHPSlider.value = 1 - answeredQuestionsNumber / AllRepeats;
+		EnemyHPText.text = AllRepeats - answeredQuestionsNumber + "/" + AllRepeats;
 		QuestionBaseProgressSlider.value = selectedQuestionDataBase.GetPercentageOfAnsweredQuestions();
 		QuestionBaseProgressText.text = answeredQuestionsNumber + "/" + selectedQuestionDataBase.Questions.Length;
 	}

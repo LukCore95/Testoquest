@@ -1,6 +1,0 @@
-X0010
-48. Wskaz narzedzia wykorzystywane w procesie ekstrakcji cech sygnalu akustycznego:
-krotkookresowa Transformata Fouriera
-Liniowe Kodowanie Predykcyjne LPC
-Cepstrum
-Perceptualna Predykcja Liniowa PLP

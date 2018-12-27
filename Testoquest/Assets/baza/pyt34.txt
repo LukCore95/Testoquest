@@ -1,6 +1,0 @@
-X1110
-34. Ktore stwierdzenia charakteryzuja synteze korpusowa
-do wyszukiwania najlepszej sekwencji jednostek jezykowych uzywa sie algorytmu Viterbi
-optymalny wybor jednostki jezykowej jest najwazniejszym problemem syntezy korpusowej
-w syntezie korpusowej bierze sie pod uwage wiele roznych realizacji tej samej jednostki jezykowej
-rozmiar bazy danych w syntezie korpusowej jest istotnie mniejszy niz w syntezie konkatenacyjnej

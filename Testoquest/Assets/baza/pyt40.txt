@@ -1,6 +1,0 @@
-X1000
-40. Analiza semantyczna:
-stara sie przedstawiac znaczenie zdania w pewnej abstrakcyjnej strukturze, najczesciej logicznej
-wykorzystuje rachunek lambda, HMM, SVM
-ma na celu wyekstrahowac kontekstowo niezalezne znaczenie zdania w jezyku pisanym
-zawsze zwraca jednoznaczna interpretacje zdania

@@ -1,6 +1,0 @@
-X0101
-47. Dekodowanie polega na:
-wyszukiwaniu kolejnego stanu HMM w zaleznosci od aktualnie obserwowanego wektora cech
-wyszukiwanie najbardziej prawdopodobnej sekwencji stanow HMM dla zadanego wejscia akustycznego
-wyszukiwaniu sekwencji stanow HMM odpowiadajacej slowu wypowiedzianemu na wejsciu
-wyszukiwaniu wszystkich mozliwych sekwencji stanow HMM odpowiadajacych danemu wejsciu akustycznemu

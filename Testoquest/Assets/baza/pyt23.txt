@@ -1,6 +1,0 @@
-X0011
-23. Miedzynarodowy alfabet fonetyczny jest
-Zbiorem liter danego jezyka naturalnego
-Zbiorem glosek danego jezyka naturalnego
-Systemem transkrypcji fonetycznej, ktory zawiera ujednolicony dla wszystkich jezykow swiata sposob przedstawiania glosek
-Zbiorem skladajacym sie z symboli alfabetycznych, niealfabetycznych oraz znakow diakrytycznych

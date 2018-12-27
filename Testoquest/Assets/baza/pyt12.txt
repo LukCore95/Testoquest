@@ -1,6 +1,0 @@
-X0110
-12. Ktore z nizej wymienionych algorytmow rozwiazuja problemy zwiazane z algorytmem Viterbiego
-Algorytm w przod (forward)
-Algorytm wieloprzebiegowy
-Algorytm A*
-Algorytm ze sprzezeniem zwrotnym

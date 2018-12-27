@@ -1,6 +1,0 @@
-X1011
-38. Ktore z ponizszych stwierdzen sa prawdziwe
-w rozpoznawaniu mowcy uzywa sie innego zestawu cech niz w systemach ASR
-w identyfikacji mowcy wykorzystuje sie jeden, ten sam model wymowy kazdego mowcy
-weryfikacja mowcy nastepuje wowczas, gdy model osoby potwierdzajacej tozsamosc dostatecznie dobrze pasuje do wypowiedzi na wejsciu systemu
-identyfikacja mowcy moze odbywac sie na podstawie dowolnego tekstu wypowiedzi na wejsciu systemu

@@ -1,6 +1,0 @@
-X0111
-17. Wskaz elementy wektora cech wykorzystywanego w systemach rozpoznawania mowy
-Czestotliwosc i amplitudy 3 pierwszych formantow
-Wspolczynniki MFCC
-Roznice miedzy ramkami sygnalu
-Energia sygnalu

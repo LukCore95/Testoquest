@@ -1,6 +1,0 @@
-X1111
-4. Od czego zalezy skutecznosc rozpoznawania mowy:
-Od rodzaju zadania
-Od rodzaju tekstu (np. tekst spontaniczny czy czytany)
-Srodowiska (zaklocenia, halas)
-Mowcy (gwara, obca wymowa)

@@ -18,6 +18,12 @@ public static class PlayerPrefsManager
 		return PlayerPrefs.GetString(dataBaseName + "_Path");
 	}
 
+	public static void DeleteQuestionDataBasePath(string dataBaseName)
+	{
+		PlayerPrefs.DeleteKey(dataBaseName + "_Path");
+		PlayerPrefs.Save();
+	}
+
 	public static void SaveQuestionDataBaseNameToPlayerPrefs(int index,string dataBaseName)
 	{
 		PlayerPrefs.SetString("QuestionDataBase" + index,dataBaseName);
@@ -32,6 +38,11 @@ public static class PlayerPrefsManager
 	public static bool CheckQuestionDataBaseNameFromPlayerPrefs(int index)
 	{
 		return PlayerPrefs.HasKey("QuestionDataBase" + index);
+	}
+
+	public static void DeleteQuestionDataBaseName(int index)
+	{
+		PlayerPrefs.DeleteKey("QuestionDataBase" + index);
 	}
 
 	public static TimeSpan GetQuestionDataBaseTimeSpent(string dataBaseName)

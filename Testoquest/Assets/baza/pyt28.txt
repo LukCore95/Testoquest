@@ -1,6 +1,0 @@
-X1110
-28. Wskaz podejscie stosowane do modelowania dyskusji
-gramatyki dialogowe
-teoria gier konwersacyjnych
-model w ktorym konwersacja traktowana jest jako wspolna aktywnosc rozmowcow
-model w ktorym rozmowa traktowana jest jako niezobowiazujaca wymiana informacji

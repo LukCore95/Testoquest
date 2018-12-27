@@ -46,7 +46,7 @@ public class QuestionDataBaseManager : Singleton<QuestionDataBaseManager>
 		}
 	}
 
-	public void AddNewQuestionDataBase(string questionDataBasePath, string DataBaseName)
+	public void AddNewQuestionDataBase(string questionDataBasePath, string dataBaseName)
 	{
 		int index = 0;
 		while (PlayerPrefsManager.CheckQuestionDataBaseNameFromPlayerPrefs(index))
@@ -54,13 +54,39 @@ public class QuestionDataBaseManager : Singleton<QuestionDataBaseManager>
 			index++;
 		}
 
-		PlayerPrefsManager.SaveQuestionDataBaseNameToPlayerPrefs(index,DataBaseName);
-		PlayerPrefsManager.SaveQuestionDataBasePath(questionDataBasePath,DataBaseName);
+		PlayerPrefsManager.SaveQuestionDataBaseNameToPlayerPrefs(index,dataBaseName);
+		PlayerPrefsManager.SaveQuestionDataBasePath(questionDataBasePath,dataBaseName);
 		UpdateQuestionDataBaseNames();
 		UpdateQuestionDataBases();
 	}
 
-	public static void UpdateQuestionToAnswered(QuestionDataBase DataBase,Question answeredQuestion)
+	public void DeleteDataBase(string dataBaseName)
+	{
+		int index = QuestionDataBaseNames.FindIndex(name => name == dataBaseName);
+		PlayerPrefsManager.DeleteQuestionDataBaseName(index);
+		PlayerPrefsManager.DeleteQuestionDataBasePath(dataBaseName);
+		QuestionDataBaseNames.Remove(dataBaseName);
+		RefreshDataBases();
+	}
+
+	private void RefreshDataBases()
+	{
+		int index = 0;
+		while (PlayerPrefsManager.CheckQuestionDataBaseNameFromPlayerPrefs(index))
+		{
+			PlayerPrefsManager.DeleteQuestionDataBaseName(index);
+			index++;
+		}
+
+		for (var i= 0; i < QuestionDataBaseNames.Count; i++)
+		{
+			PlayerPrefsManager.SaveQuestionDataBaseNameToPlayerPrefs(i, QuestionDataBaseNames[i]);
+		}
+
+		UpdateQuestionDataBases();
+	}
+
+	public void UpdateQuestionToAnswered(QuestionDataBase DataBase,Question answeredQuestion)
 	{
 		Question _answeredQuestion =
 			DataBase.Questions.First(question => question.QuestionName == answeredQuestion.QuestionName);

@@ -1,6 +1,0 @@
-X1110
-29. Ze wzgledu na model stosowany do reprezentacji wzorcow w obrazie metody wykrywania twarzy dzieli sie na - str 95
-metody oparte na blokach
-metody oparte na regionach
-metody oparte na wlasnosciach
-metody oparte na histogramach

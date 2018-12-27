@@ -1,6 +1,0 @@
-X1000
-35. Podstawowym modelem stosowanym w modelowaniu akustycznym jest
-ukryty lancuch Markova HMM
-analiza formantow
-siec Bayesa
-modelowanie dynamiczne

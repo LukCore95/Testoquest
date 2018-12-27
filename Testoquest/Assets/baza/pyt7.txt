@@ -1,6 +1,0 @@
-X0011
-7. Dla syntezatora mowy opartego na wyborze jednostek, danymi wejsciowymi sa
-Czestotliwosc podstawowa
-Dlugosc trwania jednostki
-Ciag glosek
-Informacja o akcencie

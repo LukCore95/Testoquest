@@ -1,6 +1,0 @@
-X1010
-20. Algorytm Viterbiego
-Pozwala ustalic najlepszy ciag stanow
-Jest algorytmem optymalnym
-Zawsze daje najlepsze wyniki, jesli modelem jezyka sa bigramy
-Daje najlepsze wyniki, gdy jakies slowo ma rozne warianty wymowy

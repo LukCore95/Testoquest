@@ -1,6 +1,0 @@
-X1101
-31. Wskaz etapy na jakie dekomponowany jest problem rozpoznawania gestow dloni:
-wykrywanie dloni
-klasyfikacja gestow
-problem rozpoznawania gestow dlon
-rozpoznawanie gestow

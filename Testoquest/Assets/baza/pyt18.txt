@@ -1,6 +1,0 @@
-X1010
-18. Do rozpoznawania glosek najczesciej wykorzystuje sie
-Ukryte modele Markowa HMM
-Maszyne wektorow nosnych SVM
-Wielowymiarowy model Gaussa GMM
-Sieci neuronowe NN

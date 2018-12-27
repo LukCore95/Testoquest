@@ -1,6 +1,0 @@
-X0100
-19. W niejawnych modelach Markowa stany reprezentuja
-Aktualnie analizowane ramki sygnalu aktustycznego
-Aktualnie rozpatrywany wektor cech
-Ostatnio rozpoznana gloske
-Gloski, od ktorych moga zaczynac sie kolejne wyrazy w zdaniu

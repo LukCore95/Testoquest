@@ -1,6 +1,0 @@
-X1111
-30. Interpretacja kontekstowa
-rozstrzyga anafory, zaimki oraz elipsy
-ma na celu doprecyzowanie informacji semantycznej
-wykorzystuje jednostki dialogu i centra dyskusji do rozstrzygniecia anafor i zaimkow
-korzysta z informacji na poziomie dyskusji

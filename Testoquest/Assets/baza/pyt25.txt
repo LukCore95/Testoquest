@@ -1,6 +1,0 @@
-X1111
-25. W jaki sposob oblicza sie wspolczynniki melcepstralne reprezentujace sygnaly mowy (zaznacz wlasciwa kolejnosc operacji)
-Odwrotna transformata Fouriera (cepstrum) 4
-Logarytmowanie 3
-Transformata Fouriera (widmo) 1
-Przejscie z czestotliwosci w Hz na skale czestotliwosci w Melach 2
