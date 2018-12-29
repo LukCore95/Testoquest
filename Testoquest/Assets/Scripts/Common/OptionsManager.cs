@@ -33,16 +33,16 @@ public class OptionsManager : Singleton<OptionsManager>
 		set { _vibrations = value; }
 	}
 	
-	public int StartingRepeatQuestionsNumber
+	public int StartingRepeatsPerQuestionsNumber
 	{
-		get { return _startingRepeatQuestionsNumber; }
-		set{ _startingRepeatQuestionsNumber = value; }
+		get { return _startingRepeatsPerQuestionsNumber; }
+		set{ _startingRepeatsPerQuestionsNumber = value; }
 	}
 
-	public int RepeatQuestionsNumber
+	public int RepeatsPerQuestionsAtMistakeNumber
 	{
-		get { return _repeatQuestionsNumber; }
-		set{ _repeatQuestionsNumber = value; }
+		get { return _repeatsPerQuestionsAtMistakeNumber; }
+		set{ _repeatsPerQuestionsAtMistakeNumber = value; }
 	}
 
 	public TimeSpan TimeForAnswer
@@ -60,8 +60,8 @@ public class OptionsManager : Singleton<OptionsManager>
 	[SerializeField] private float _musicVolume;
 	[SerializeField] private float _soundVolume;
 	[SerializeField] private bool _vibrations;
-	[SerializeField] private int _repeatQuestionsNumber;
-	[SerializeField] private int _startingRepeatQuestionsNumber;
+	[SerializeField] private int _repeatsPerQuestionsAtMistakeNumber;
+	[SerializeField] private int _startingRepeatsPerQuestionsNumber;
 	[SerializeField] private TimeSpan _timeForAnswer;
 	[SerializeField] private bool _learnWithoutGame;
 
@@ -86,8 +86,8 @@ public class OptionsManager : Singleton<OptionsManager>
 		optionsUI.MusicSlider.value = MusicVolume;
 		optionsUI.SoundSlider.value = SoundVolume;
 		optionsUI.VibrationsToggle.isOn = Vibrations;
-		optionsUI.RepeatQuestionsInputField.text = RepeatQuestionsNumber.ToString();
-		optionsUI.StartingRepeatQuestionsInputField.text = StartingRepeatQuestionsNumber.ToString();
+		optionsUI.RepeatQuestionsInputField.text = RepeatsPerQuestionsAtMistakeNumber.ToString();
+		optionsUI.StartingRepeatQuestionsInputField.text = StartingRepeatsPerQuestionsNumber.ToString();
 		optionsUI.TimeForAnswerImInputField.text = TimeForAnswer.ToString(@"mm\:ss");
 		optionsUI.LearnWithoutGameToggle.isOn = LearnWithoutGame;
 	}

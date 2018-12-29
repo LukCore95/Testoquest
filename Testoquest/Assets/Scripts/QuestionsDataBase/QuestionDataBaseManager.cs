@@ -65,8 +65,22 @@ public class QuestionDataBaseManager : Singleton<QuestionDataBaseManager>
 		int index = QuestionDataBaseNames.FindIndex(name => name == dataBaseName);
 		PlayerPrefsManager.DeleteQuestionDataBaseName(index);
 		PlayerPrefsManager.DeleteQuestionDataBasePath(dataBaseName);
+		PlayerPrefsManager.DeleteQuestionDataBaseTimeSpent(dataBaseName);
 		QuestionDataBaseNames.Remove(dataBaseName);
 		RefreshDataBases();
+	}
+
+	public void ResetDataBaseState(string dataBaseName)
+	{
+		QuestionDataBase dataBase = QuestionDataBases.Find(database => database.Name == dataBaseName);
+		foreach (Question question in dataBase.Questions)
+		{
+			question.IsAnswered = false;
+			PlayerPrefsManager.SaveQuestionState(dataBase,question);
+		}
+		PlayerPrefsManager.SaveQuestionDataBaseState(dataBase);
+		TimeSpan zerotimeSpan = new TimeSpan();
+		PlayerPrefsManager.SaveQuestionDataBaseTimeSpent(dataBaseName,zerotimeSpan.ToString());
 	}
 
 	private void RefreshDataBases()
@@ -86,10 +100,11 @@ public class QuestionDataBaseManager : Singleton<QuestionDataBaseManager>
 		UpdateQuestionDataBases();
 	}
 
-	public void UpdateQuestionToAnswered(QuestionDataBase DataBase,Question answeredQuestion)
+	public void UpdateQuestionToAnswered(QuestionDataBase DataBase,Question updatedAnsweredQuestion)
 	{
 		Question _answeredQuestion =
-			DataBase.Questions.First(question => question.QuestionName == answeredQuestion.QuestionName);
+			DataBase.Questions.First(question => question.QuestionName == updatedAnsweredQuestion.QuestionName);
+		_answeredQuestion = updatedAnsweredQuestion;
 		PlayerPrefsManager.SaveQuestionState(DataBase,_answeredQuestion);
 	}
 }

@@ -73,12 +73,12 @@ public class Options : UIView
 
 	private void SetRepeats(string arg0)
 	{
-		OptionsManager.Instance.RepeatQuestionsNumber = int.Parse(arg0);
+		OptionsManager.Instance.RepeatsPerQuestionsAtMistakeNumber = int.Parse(arg0);
 	}
 
 	private void SetStartingRepeats(string arg0)
 	{
-		OptionsManager.Instance.StartingRepeatQuestionsNumber = int.Parse(arg0);
+		OptionsManager.Instance.StartingRepeatsPerQuestionsNumber = int.Parse(arg0);
 	}
 
 	private void SetVibrations(bool arg0)

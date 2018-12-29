@@ -105,6 +105,7 @@ namespace GracesGames.SimpleFileBrowser.Scripts {
 			}
 
 			SetupPath(startPath);
+			UpdateFileBrowser();
 		}
 
 		// Sets the current path (Android or other devices)

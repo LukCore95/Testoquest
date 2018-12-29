@@ -43,6 +43,7 @@ public static class PlayerPrefsManager
 	public static void DeleteQuestionDataBaseName(int index)
 	{
 		PlayerPrefs.DeleteKey("QuestionDataBase" + index);
+		PlayerPrefs.Save();
 	}
 
 	public static TimeSpan GetQuestionDataBaseTimeSpent(string dataBaseName)
@@ -54,8 +55,15 @@ public static class PlayerPrefsManager
 	public static void SaveQuestionDataBaseTimeSpent(string dataBaseName, string timeSpent)
 	{
 		PlayerPrefs.SetString(dataBaseName+"_TimeSpent",timeSpent);
+		PlayerPrefs.Save();
 	}
 	
+	public static void DeleteQuestionDataBaseTimeSpent(string dataBaseName)
+	{
+		PlayerPrefs.DeleteKey(dataBaseName+"_TimeSpent");
+		PlayerPrefs.Save();
+	}
+
 	public static void SaveQuestionDataBaseState(QuestionDataBase dataBaseToSave)
 	{
 		foreach (Question question in dataBaseToSave.Questions)
@@ -63,16 +71,6 @@ public static class PlayerPrefsManager
 			string key = dataBaseToSave.Name + "_" + question.QuestionName;
 			int value = Convert.ToInt32(question.IsAnswered);
 			PlayerPrefs.SetInt(key,value);
-		}
-		PlayerPrefs.Save();
-	}
-
-	public static void DeleteQuestionDataBaseState(QuestionDataBase dataBaseToSave)
-	{
-		foreach (Question question in dataBaseToSave.Questions)
-		{
-			string key = dataBaseToSave.Name + "_" + question.QuestionName;
-			PlayerPrefs.DeleteKey(key);
 		}
 		PlayerPrefs.Save();
 	}
@@ -103,8 +101,8 @@ public static class PlayerPrefsManager
 		PlayerPrefs.SetFloat("MusicVolume",OptionsManager.Instance.MusicVolume);
 		PlayerPrefs.SetFloat("SoundVolume",OptionsManager.Instance.SoundVolume);
 		PlayerPrefs.SetInt("Vibrations", Convert.ToInt32(OptionsManager.Instance.Vibrations));
-		PlayerPrefs.SetInt("Repeats", OptionsManager.Instance.RepeatQuestionsNumber);
-		PlayerPrefs.SetInt("StartingRepeats", OptionsManager.Instance.StartingRepeatQuestionsNumber);
+		PlayerPrefs.SetInt("Repeats", OptionsManager.Instance.RepeatsPerQuestionsAtMistakeNumber);
+		PlayerPrefs.SetInt("StartingRepeats", OptionsManager.Instance.StartingRepeatsPerQuestionsNumber);
 		PlayerPrefs.SetString("TimeForAnswer",OptionsManager.Instance.TimeForAnswer.ToString(@"mm\:ss"));
 		PlayerPrefs.SetInt("LearnWithoutGame", Convert.ToInt32(OptionsManager.Instance.LearnWithoutGame));
 
@@ -116,8 +114,8 @@ public static class PlayerPrefsManager
 		OptionsManager.Instance.MusicVolume = PlayerPrefs.GetFloat("MusicVolume");
 		OptionsManager.Instance.SoundVolume = PlayerPrefs.GetFloat("SoundVolume");
 		OptionsManager.Instance.Vibrations = Convert.ToBoolean(PlayerPrefs.GetInt("Vibrations"));
-		OptionsManager.Instance.RepeatQuestionsNumber = PlayerPrefs.GetInt("Repeats");
-		OptionsManager.Instance.StartingRepeatQuestionsNumber = PlayerPrefs.GetInt("StartingRepeats");
+		OptionsManager.Instance.RepeatsPerQuestionsAtMistakeNumber = PlayerPrefs.GetInt("Repeats");
+		OptionsManager.Instance.StartingRepeatsPerQuestionsNumber = PlayerPrefs.GetInt("StartingRepeats");
 		OptionsManager.Instance.TimeForAnswer = TimeSpan.ParseExact(PlayerPrefs.GetString("TimeForAnswer"),@"mm\:ss", CultureInfo.CurrentCulture, TimeSpanStyles.None);
 		OptionsManager.Instance.LearnWithoutGame = Convert.ToBoolean(PlayerPrefs.GetInt("LearnWithoutGame"));
 	}

@@ -113,6 +113,20 @@ public class ChooseBase : UIView
 
 	private void ChooseButton_OnClicked()
 	{
+
+		if (SelectedBase.BaseProgressSlider.value == 1)
+		{
+			YesOrNo.SetFromChooseBaseSelectBaseButton(SelectedBase.QuestionDataBase,GoToGame);
+			UIManager.Instance.GoToView(YesOrNo);
+		}
+		else
+		{
+			GoToGame();
+		}
+	}
+
+	private void GoToGame()
+	{
 		Game.SetQuestionBase(SelectedBase.QuestionDataBase);
 		UIManager.Instance.GoToView(Game);
 	}
