@@ -36,16 +36,19 @@ public class Game : UIView
 	public Button ExitButton;
 	public GameObject AnswerContentElementPrefab;
 
-	[SerializeField] private QuestionDataBase selectedQuestionDataBase;
-	[SerializeField] private List<QuestionRepeatsStruct> questionRepeats = new List<QuestionRepeatsStruct>();
-	[SerializeField] private Question currentQuestion;
-	[SerializeField] private List<AnswerScrollViewElement> currentAnswerElements = new List<AnswerScrollViewElement>();
-	[SerializeField] private TimeSpan timeSpent;
-	[SerializeField] private double timer;
-	[SerializeField] private double timerForAnswer;
-	[SerializeField] private float answeredQuestionsNumber;
-	[SerializeField] private float goodAnswersNumber;
-	[SerializeField] private float allQuestionRepeats;
+	[SerializeField] private AnimationManager _animationManager;
+	[SerializeField] private QuestionDataBase _selectedQuestionDataBase;
+	[SerializeField] private List<QuestionRepeatsStruct> _questionRepeats = new List<QuestionRepeatsStruct>();
+	[SerializeField] private Question _currentQuestion;
+	[SerializeField] private List<AnswerScrollViewElement> _currentAnswerElements = new List<AnswerScrollViewElement>();
+	[SerializeField] private TimeSpan _timeSpent;
+	[SerializeField] private bool _isTime;
+	[SerializeField] private double _timer;
+	[SerializeField] private double _timerForAnswer;
+	[SerializeField] private float _answeredQuestionsNumber;
+	[SerializeField] private float _goodAnswersNumber;
+	[SerializeField] private float _allQuestionRepeats;
+
 
 	private void Start()
 	{
@@ -54,9 +57,12 @@ public class Game : UIView
 
 	private void Update()
 	{
-		timer += Time.deltaTime;
-		timeSpent = TimeSpan.FromSeconds(timer);
-		TimeSpentText.text = timeSpent.ToString();
+		if (_isTime)
+		{
+			_timer += Time.deltaTime;
+			_timeSpent = TimeSpan.FromSeconds(_timer);
+			TimeSpentText.text = _timeSpent.ToString();
+		}
 	}
 
 	public override void OnEnable()
@@ -64,58 +70,60 @@ public class Game : UIView
 		UIManager.Instance.Background.DisableAll();
 		UIManager.Instance.Background.BackButton.gameObject.SetActive(true);
 		UIManager.Instance.Background.SetBackButtonListener(SaveAndGoBack);
+		_isTime = true;
 		WinBorder.SetActive(false);
 		QuestionPhase();
 	}
 
 	public override void OnDisable()
 	{
-		Time.timeScale = 1;
-		questionRepeats.Clear();
-		selectedQuestionDataBase = null;
+		_isTime = false;
+		_questionRepeats.Clear();
+		_selectedQuestionDataBase = null;
 	}
 
-	public void SetQuestionBase(QuestionDataBase _selectedQuestionDataBase)
+	public void SetQuestionBase(QuestionDataBase selectedQuestionDataBase)
 	{
-		answeredQuestionsNumber = 0;
-		questionRepeats.Clear();
-		selectedQuestionDataBase = _selectedQuestionDataBase;
-		allQuestionRepeats = OptionsManager.Instance.StartingRepeatsPerQuestionsNumber * selectedQuestionDataBase.Questions.Length;
-		foreach (Question question in selectedQuestionDataBase.Questions)
+		_answeredQuestionsNumber = 0;
+		_questionRepeats.Clear();
+		_selectedQuestionDataBase = selectedQuestionDataBase;
+		_allQuestionRepeats = OptionsManager.Instance.StartingRepeatsPerQuestionsNumber * this._selectedQuestionDataBase.Questions.Length;
+		foreach (Question question in this._selectedQuestionDataBase.Questions)
 		{
 			if (!question.IsAnswered)
 			{
-				questionRepeats.Add(new QuestionRepeatsStruct(question,OptionsManager.Instance.StartingRepeatsPerQuestionsNumber));
+				_questionRepeats.Add(new QuestionRepeatsStruct(question,OptionsManager.Instance.StartingRepeatsPerQuestionsNumber));
 			}
 			else
 			{
-				answeredQuestionsNumber++;
+				_answeredQuestionsNumber++;
 			}
 		}
-		timeSpent = selectedQuestionDataBase.TimeSpent;
-		timer = timeSpent.TotalSeconds;
-		TimeSpentText.text = timeSpent.ToString();
+		_timeSpent = this._selectedQuestionDataBase.TimeSpent;
+		_timer = _timeSpent.TotalSeconds;
+		TimeSpentText.text = _timeSpent.ToString();
 		UpdateProgress();
 	}
 
 	private void QuestionPhase()
 	{
-		if (questionRepeats.Count > 0)
+		_animationManager.PlayIdleAnimation();
+		if (_questionRepeats.Count > 0)
 		{
-			currentAnswerElements.Clear();
+			_currentAnswerElements.Clear();
 			Random randomIndex = new Random();
-			currentQuestion = questionRepeats[randomIndex.Next(questionRepeats.Count)].Question;
-			QuestionText.text = currentQuestion.QuestionText;
+			_currentQuestion = _questionRepeats[randomIndex.Next(_questionRepeats.Count)].Question;
+			QuestionText.text = _currentQuestion.QuestionText;
 			foreach (Transform child in Content)
 			{
 				Destroy(child.gameObject);
 			}
-			foreach (Answer answer in currentQuestion.Answers)
+			foreach (Answer answer in _currentQuestion.Answers)
 			{
 				GameObject answerGameObject = Instantiate(AnswerContentElementPrefab, Content);
 				AnswerScrollViewElement answerScript = answerGameObject.GetComponent<AnswerScrollViewElement>();
 				answerScript.SetAnswer(answer);
-				currentAnswerElements.Add(answerScript);
+				_currentAnswerElements.Add(answerScript);
 			}
 
 			StartCoroutine(DecreaseQuestionTimer());
@@ -128,11 +136,11 @@ public class Game : UIView
 
 	private IEnumerator DecreaseQuestionTimer()
 	{
-		timerForAnswer = OptionsManager.Instance.TimeForAnswer.TotalSeconds;
-		while (timerForAnswer > 0)
+		_timerForAnswer = OptionsManager.Instance.TimeForAnswer.TotalSeconds;
+		while (_timerForAnswer > 0)
 		{
-			timerForAnswer -= Time.deltaTime;
-			TimeForAnswerText.text = TimeSpan.FromSeconds(timerForAnswer).ToString();
+			_timerForAnswer -= Time.deltaTime;
+			TimeForAnswerText.text = TimeSpan.FromSeconds(_timerForAnswer).ToString();
 			yield return new WaitForFixedUpdate();
 		}
 		CheckAnswersPhase();
@@ -141,15 +149,15 @@ public class Game : UIView
 	private void CheckAnswersPhase()
 	{
 		StopAllCoroutines();
-		int numberOfAnswers = currentQuestion.Answers.Count;
+		int numberOfAnswers = _currentQuestion.Answers.Count;
 		int numberOfMatchedAnswers = 0;
 		int repeatsStructIndex =
-			questionRepeats.FindIndex(_struct => _struct.Question == currentQuestion);
-		QuestionRepeatsStruct repeatsStruct = questionRepeats[repeatsStructIndex];
-		foreach (Answer answer in currentQuestion.Answers)
+			_questionRepeats.FindIndex(_struct => _struct.Question == _currentQuestion);
+		QuestionRepeatsStruct repeatsStruct = _questionRepeats[repeatsStructIndex];
+		foreach (Answer answer in _currentQuestion.Answers)
 		{
 			AnswerScrollViewElement answerElement =
-				currentAnswerElements.Find(_answerElement => _answerElement.Answer == answer);
+				_currentAnswerElements.Find(_answerElement => _answerElement.Answer == answer);
 			if (answerElement.IsSelected == answer.IsCorrect)
 			{
 				numberOfMatchedAnswers++;
@@ -169,23 +177,25 @@ public class Game : UIView
 
 		if (numberOfAnswers == numberOfMatchedAnswers)
 		{
-			goodAnswersNumber++;
+			_animationManager.PlayGoodAnswerAnimation();
+			_goodAnswersNumber++;
 			repeatsStruct.RepeatsLeft--;
 		}
 		else
 		{
+			_animationManager.PlayBadAnswerAnimation();
 			repeatsStruct.RepeatsLeft = repeatsStruct.RepeatsLeft + OptionsManager.Instance.RepeatsPerQuestionsAtMistakeNumber;
-			allQuestionRepeats += OptionsManager.Instance.RepeatsPerQuestionsAtMistakeNumber;
+			_allQuestionRepeats += OptionsManager.Instance.RepeatsPerQuestionsAtMistakeNumber;
 		}
 
-		questionRepeats[repeatsStructIndex] = repeatsStruct;
+		_questionRepeats[repeatsStructIndex] = repeatsStruct;
 
-		if (questionRepeats[repeatsStructIndex].RepeatsLeft == 0)
+		if (_questionRepeats[repeatsStructIndex].RepeatsLeft == 0)
 		{
-			questionRepeats.RemoveAt(repeatsStructIndex);
-			answeredQuestionsNumber++;
-			currentQuestion.IsAnswered = true;
-			QuestionDataBaseManager.Instance.UpdateQuestionToAnswered(selectedQuestionDataBase, currentQuestion);
+			_questionRepeats.RemoveAt(repeatsStructIndex);
+			_answeredQuestionsNumber++;
+			_currentQuestion.IsAnswered = true;
+			QuestionDataBaseManager.Instance.UpdateQuestionToAnswered(_selectedQuestionDataBase, _currentQuestion);
 		}
 
 		UpdateProgress();
@@ -198,24 +208,25 @@ public class Game : UIView
 
 	private void CheckIfWon()
 	{
-		if (questionRepeats.Count == 0)
+		if (_questionRepeats.Count == 0)
 		{
-			Time.timeScale = 0;
+			_isTime = false;
+			_animationManager.PlayWinAnimation();
 			WinBorder.SetActive(true);
 		}
 	}
 
 	private void UpdateProgress()
 	{
-		selectedQuestionDataBase.TimeSpent = TimeSpan.Parse(TimeSpentText.text,CultureInfo.CurrentCulture);
+		_selectedQuestionDataBase.TimeSpent = TimeSpan.Parse(TimeSpentText.text,CultureInfo.CurrentCulture);
 		//selectedQuestionDataBase.TimeSpent = TimeSpan.ParseExact(TimeSpentText.text,@"hh\:mm\:ss", CultureInfo.CurrentCulture, TimeSpanStyles.None);
-		PlayerPrefsManager.SaveQuestionDataBaseTimeSpent(selectedQuestionDataBase.Name,TimeSpentText.text);
+		PlayerPrefsManager.SaveQuestionDataBaseTimeSpent(_selectedQuestionDataBase.Name,TimeSpentText.text);
 
 
-		EnemyHPSlider.value = 1 - goodAnswersNumber / allQuestionRepeats;
-		EnemyHPText.text = allQuestionRepeats - goodAnswersNumber + "/" + allQuestionRepeats;
-		QuestionBaseProgressSlider.value = selectedQuestionDataBase.GetPercentageOfAnsweredQuestions();
-		QuestionBaseProgressText.text = answeredQuestionsNumber + "/" + selectedQuestionDataBase.Questions.Length;
+		EnemyHPSlider.value = 1 - _goodAnswersNumber / _allQuestionRepeats;
+		EnemyHPText.text = _allQuestionRepeats - _goodAnswersNumber + "/" + _allQuestionRepeats;
+		QuestionBaseProgressSlider.value = _selectedQuestionDataBase.GetPercentageOfAnsweredQuestions();
+		QuestionBaseProgressText.text = _answeredQuestionsNumber + "/" + _selectedQuestionDataBase.Questions.Length;
 	}
 
 	private void SaveAndGoBack()
