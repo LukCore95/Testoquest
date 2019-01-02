@@ -73,14 +73,14 @@ public class QuestionDataBaseManager : Singleton<QuestionDataBaseManager>
 	public void ResetDataBaseState(string dataBaseName)
 	{
 		QuestionDataBase dataBase = QuestionDataBases.Find(database => database.Name == dataBaseName);
+		dataBase.TimeSpent = new TimeSpan();
 		foreach (Question question in dataBase.Questions)
 		{
 			question.IsAnswered = false;
 			PlayerPrefsManager.SaveQuestionState(dataBase,question);
 		}
 		PlayerPrefsManager.SaveQuestionDataBaseState(dataBase);
-		TimeSpan zerotimeSpan = new TimeSpan();
-		PlayerPrefsManager.SaveQuestionDataBaseTimeSpent(dataBaseName,zerotimeSpan.ToString());
+		PlayerPrefsManager.SaveQuestionDataBaseTimeSpent(dataBaseName,dataBase.TimeSpent.ToString());
 	}
 
 	private void RefreshDataBases()
@@ -106,5 +106,36 @@ public class QuestionDataBaseManager : Singleton<QuestionDataBaseManager>
 			DataBase.Questions.First(question => question.QuestionName == updatedAnsweredQuestion.QuestionName);
 		_answeredQuestion = updatedAnsweredQuestion;
 		PlayerPrefsManager.SaveQuestionState(DataBase,_answeredQuestion);
+	}
+
+	public void DeleteQuestionFromDatabase(string dataBaseName, string questionQuestionName)
+	{
+		QuestionDataBase dataBase = QuestionDataBases.Find(database => database.Name == dataBaseName);
+		Question question = dataBase.Questions.First(q => q.QuestionName == questionQuestionName);
+
+		if (question != null)
+		{
+			LocalDataManager.DeleteQuestion(dataBase, question);
+			PlayerPrefsManager.DeleteQuestionState(dataBase,question);
+			dataBase.Questions.Remove(question);
+		}
+	}
+
+	public void AddNewQuestion(QuestionDataBase dataBase, Question newQuestion)
+	{
+		QuestionDataBase dataBaseToEdit = QuestionDataBases.Find(dbase => dbase.Name == dataBase.Name);
+
+		if (dataBaseToEdit.Questions.Exists(q => q.QuestionName == newQuestion.QuestionName))
+		{
+			int existingQuestionIndex = dataBaseToEdit.Questions.FindIndex(q => q.QuestionName == newQuestion.QuestionName);
+			dataBaseToEdit.Questions[existingQuestionIndex] = newQuestion;
+		}
+		else
+		{
+			dataBaseToEdit.Questions.Add(newQuestion);
+		}
+
+		PlayerPrefsManager.SaveQuestionState(dataBaseToEdit,newQuestion);
+		LocalDataManager.SaveQuestion(dataBaseToEdit, newQuestion);
 	}
 }

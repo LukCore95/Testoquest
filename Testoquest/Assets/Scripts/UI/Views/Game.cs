@@ -79,6 +79,8 @@ public class Game : UIView
 	{
 		_isTime = false;
 		_questionRepeats.Clear();
+		_timeSpent = new TimeSpan(0,0,0);
+		_timer = 0;
 		_selectedQuestionDataBase = null;
 	}
 
@@ -87,7 +89,7 @@ public class Game : UIView
 		_answeredQuestionsNumber = 0;
 		_questionRepeats.Clear();
 		_selectedQuestionDataBase = selectedQuestionDataBase;
-		_allQuestionRepeats = OptionsManager.Instance.StartingRepeatsPerQuestionsNumber * this._selectedQuestionDataBase.Questions.Length;
+		_allQuestionRepeats = OptionsManager.Instance.StartingRepeatsPerQuestionsNumber * this._selectedQuestionDataBase.Questions.Count;
 		foreach (Question question in this._selectedQuestionDataBase.Questions)
 		{
 			if (!question.IsAnswered)
@@ -111,9 +113,11 @@ public class Game : UIView
 		if (_questionRepeats.Count > 0)
 		{
 			_currentAnswerElements.Clear();
-			Random randomIndex = new Random();
-			_currentQuestion = _questionRepeats[randomIndex.Next(_questionRepeats.Count)].Question;
+			Random randomQuestionIndex = new Random();
+			Random randomAnswersIndex = new Random();
+			_currentQuestion = _questionRepeats[randomQuestionIndex.Next(_questionRepeats.Count)].Question;
 			QuestionText.text = _currentQuestion.QuestionText;
+			_currentQuestion.Answers = _currentQuestion.Answers.OrderBy(answer => randomAnswersIndex.Next()).ToList();
 			foreach (Transform child in Content)
 			{
 				Destroy(child.gameObject);
@@ -161,19 +165,20 @@ public class Game : UIView
 			if (answerElement.IsSelected == answer.IsCorrect)
 			{
 				numberOfMatchedAnswers++;
-			}
-
-			if(answer.IsCorrect)
-			{
-				answerElement.BackgroundImage.color = Color.green;
+				if(answer.IsCorrect)
+				{
+					answerElement.BackgroundImage.color = Color.green;
+				}
+				else
+				{
+					answerElement.BackgroundImage.color = Color.white;
+				}
 			}
 			else
 			{
 				answerElement.BackgroundImage.color = Color.red;
 			}
 		}
-
-
 
 		if (numberOfAnswers == numberOfMatchedAnswers)
 		{
@@ -226,11 +231,12 @@ public class Game : UIView
 		EnemyHPSlider.value = 1 - _goodAnswersNumber / _allQuestionRepeats;
 		EnemyHPText.text = _allQuestionRepeats - _goodAnswersNumber + "/" + _allQuestionRepeats;
 		QuestionBaseProgressSlider.value = _selectedQuestionDataBase.GetPercentageOfAnsweredQuestions();
-		QuestionBaseProgressText.text = _answeredQuestionsNumber + "/" + _selectedQuestionDataBase.Questions.Length;
+		QuestionBaseProgressText.text = _answeredQuestionsNumber + "/" + _selectedQuestionDataBase.Questions.Count;
 	}
 
 	private void SaveAndGoBack()
 	{
+		PlayerPrefsManager.SaveQuestionDataBaseTimeSpent(_selectedQuestionDataBase.Name,TimeSpentText.text);
 		UIManager.Instance.GoBack();
 	}
 }

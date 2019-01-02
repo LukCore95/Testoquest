@@ -36,11 +36,6 @@ public class UIManager : Singleton<UIManager>
 		GoToView(_viewsHistory[_viewsHistory.Count - 1]);
 	}
 
-	private void ResetHistory()
-	{
-
-	}
-
 	private void AddViewToHistory(UIView viewToAdd)
 	{
 		if (_viewsHistory.Count > 0)
@@ -56,4 +51,11 @@ public class UIManager : Singleton<UIManager>
 		}
 	}
 
+	public void DeleteFromHistory(UIView uiView)
+	{
+		if (_viewsHistory.Contains(uiView))
+		{
+			_viewsHistory.Remove(uiView);
+		}
+	}
 }

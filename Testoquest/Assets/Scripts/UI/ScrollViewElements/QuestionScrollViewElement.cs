@@ -9,11 +9,14 @@ using UnityEngine.UI;
 public class QuestionScrollViewElement : MonoBehaviour
 {
 	public Question Question;
-	public Toggle ChooseBaseToggle;
-	public Slider BaseProgressSlider;
-	public Text BaseName;
-	public Button ResetButton;
+	public Text QuestionName;
 	public Button EditButton;
 	public Button DeleteButton;
+
+	public void SetQuestion(Question question)
+	{
+		Question = question;
+		QuestionName.text = Question.QuestionName;
+	}
 }
 

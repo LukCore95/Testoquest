@@ -12,6 +12,7 @@ public class QuestionDataBaseScrollViewElement : MonoBehaviour
 	public Toggle ChooseBaseToggle;
 	public Slider BaseProgressSlider;
 	public Text BaseName;
+	public Text ScoreNumberText;
 	public Button ResetButton;
 	public Button EditButton;
 	public Button DeleteButton;
@@ -21,6 +22,9 @@ public class QuestionDataBaseScrollViewElement : MonoBehaviour
 		QuestionDataBase = questionDataBase;
 		BaseProgressSlider.value = QuestionDataBase.GetPercentageOfAnsweredQuestions();
 		BaseName.text = QuestionDataBase.Name;
+		ScoreNumberText.text =
+			questionDataBase.Questions.Count(question => question != null && question.IsAnswered) + "/" +
+			questionDataBase.Questions.Count;
 	}
 }
 

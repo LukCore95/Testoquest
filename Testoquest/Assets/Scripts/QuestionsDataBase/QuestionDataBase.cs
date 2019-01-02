@@ -8,7 +8,7 @@ public class QuestionDataBase
 	public string Name;
 	public string Path;
 	public TimeSpan TimeSpent;
-	public Question[] Questions;
+	public List<Question> Questions;
 
 	public float GetPercentageOfAnsweredQuestions()
 	{
@@ -21,6 +21,6 @@ public class QuestionDataBase
 			}
 		}
 
-		return answered / (float)Questions.Length;
+		return answered / (float)Questions.Count;
 	}
 }

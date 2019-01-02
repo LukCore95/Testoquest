@@ -89,8 +89,9 @@ GameObject:
   m_Component:
   - component: {fileID: 6057246582721793987}
   - component: {fileID: 2310121225381979422}
+  - component: {fileID: 2430559223438079470}
   m_Layer: 5
-  m_Name: QuestionScrollViewElement 1
+  m_Name: QuestionScrollViewElement
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -138,6 +139,26 @@ MonoBehaviour:
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
+--- !u!114 &2430559223438079470
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1423835883737891864}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4843255e7012a144898f932e8cd6820, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Question:
+    QuestionName: 
+    QuestionText: 
+    IsAnswered: 0
+    Answers: []
+  QuestionName: {fileID: 6584569275455090636}
+  EditButton: {fileID: 2110251260578172159}
+  DeleteButton: {fileID: 9153772756011514502}
 --- !u!1 &2257256295703993957
 GameObject:
   m_ObjectHideFlags: 0

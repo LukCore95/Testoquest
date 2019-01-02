@@ -57,7 +57,7 @@ namespace GracesGames.SimpleFileBrowser.Scripts.UI {
 		// Game object and InputField that represents the name of the file to save
 		private GameObject _saveFileText;
 
-		private InputField _saveFileTextInputFile;
+		public InputField SaveFileTextInputFile;
 
 		// Game object (Text) that represents the name of the file to load
 		private GameObject _loadFileText;
@@ -80,7 +80,7 @@ namespace GracesGames.SimpleFileBrowser.Scripts.UI {
 			SetupClickListeners();
 			SetupTextLabels();
 			SetupParents();
-			SetupSearchInputField();
+			//SetupSearchInputField();
 		}
 
 		// Sets the font size and color for the directory and file texts
@@ -118,8 +118,8 @@ namespace GracesGames.SimpleFileBrowser.Scripts.UI {
 			// Find saveFileText game object to update save file text 
 			// and hook up onValueChanged listener to check the name using CheckValidFileName method
 			_saveFileText = Utilities.FindGameObjectOrError("SaveFileText");
-			_saveFileTextInputFile = _saveFileText.GetComponent<InputField>();
-			_saveFileTextInputFile.onValueChanged.AddListener(_fileBrowser.CheckValidFileName);
+			SaveFileTextInputFile = _saveFileText.GetComponent<InputField>();
+			SaveFileTextInputFile.onValueChanged.AddListener(_fileBrowser.CheckValidFileName);
 
 			// Set font size for labels and texts
 			if (pathLabel != null) {
@@ -173,12 +173,12 @@ namespace GracesGames.SimpleFileBrowser.Scripts.UI {
 
 		// Returns the text in the save file input field
 		public String GetSaveFileText() {
-			return _saveFileTextInputFile.text;
+			return SaveFileTextInputFile.text;
 		}
 
 		// Updates the input field value with a file name and extension
 		public void SetFileNameInputField(string fileName, string fileExtension) {
-			_saveFileTextInputFile.text = fileName + "." + fileExtension;
+			SaveFileTextInputFile.text = fileName + "." + fileExtension;
 		}
 
 		// Set the UI to save mode

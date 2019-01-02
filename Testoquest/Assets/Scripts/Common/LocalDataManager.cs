@@ -8,10 +8,10 @@ using System.IO;
 
 public static class LocalDataManager
 {
-	public static Question[] GetQuestionsFromFolder(string folderPath)
+	public static List<Question> GetQuestionsFromFolder(string folderPath)
 	{
 		List<Question> questions = new List<Question>();
-
+		Directory.CreateDirectory(folderPath);
 		string[] filePaths = Directory.GetFiles(folderPath,"pyt*.txt");
 		
 		foreach (string filePath in filePaths)
@@ -40,6 +40,37 @@ public static class LocalDataManager
 			questions.Add(newQuestion);
 		}
 
-		return questions.ToArray();
+		return questions.ToList();
+	}
+
+	public static void DeleteQuestion(QuestionDataBase dataBase, Question question)
+	{
+		File.Delete(dataBase.Path + "/" + question.QuestionName + ".txt");
+	}
+
+	public static void SaveQuestion(QuestionDataBase dataBaseToEdit, Question question)
+	{
+		string answerCorrectness = "X";
+
+		foreach (Answer answer in question.Answers)
+		{
+			if (answer.IsCorrect)
+			{
+				answerCorrectness += 1.ToString();
+			}
+			else
+			{
+				answerCorrectness += 0.ToString();
+			}
+		}
+
+		List<string> questionContentLines = new List<string>();
+		questionContentLines.Add(answerCorrectness);
+		questionContentLines.Add(question.QuestionText);
+		foreach (Answer answer in question.Answers)
+		{
+			questionContentLines.Add(answer.AnswerText);
+		}
+		File.WriteAllLines(@dataBaseToEdit.Path + "/" + question.QuestionName + ".txt",questionContentLines);
 	}
 }

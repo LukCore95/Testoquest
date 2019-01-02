@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class ChooseBase : UIView
@@ -40,7 +41,6 @@ public class ChooseBase : UIView
 
 	private void ClearScrollView()
 	{
-		Debug.Log("Clearing Scroll view");
 		foreach (Transform child in Content.transform)
 		{
 			Destroy(child.gameObject);
@@ -65,7 +65,7 @@ public class ChooseBase : UIView
 			newContentElementScript.EditButton.onClick.AddListener(
 				delegate
 				{
-					ContentElementOnEdit(newContentElementScript);
+					ContentElementOnEdit(newContentElementScript.QuestionDataBase);
 				});
 			newContentElementScript.ResetButton.onClick.AddListener(
 				delegate
@@ -92,9 +92,9 @@ public class ChooseBase : UIView
 		UIManager.Instance.GoToView(YesOrNo);
 	}
 
-	private void ContentElementOnEdit(QuestionDataBaseScrollViewElement contentElement)
+	private void ContentElementOnEdit(QuestionDataBase questionDataBase)
 	{
-		EditBase.SetEditBase(contentElement.QuestionDataBase);
+		EditBase.SetEditBase(questionDataBase);
 		UIManager.Instance.GoToView(EditBase);
 	}
 
@@ -113,10 +113,15 @@ public class ChooseBase : UIView
 
 	private void ChooseButton_OnClicked()
 	{
-
 		if (SelectedBase.BaseProgressSlider.value == 1)
 		{
-			YesOrNo.SetFromChooseBaseSelectBaseButton(SelectedBase.QuestionDataBase,GoToGame);
+			YesOrNo.SetFromChooseBaseBaseIs100Percent(SelectedBase.QuestionDataBase,GoToGame);
+			UIManager.Instance.GoToView(YesOrNo);
+		}
+		else if(SelectedBase.QuestionDataBase.Questions.Count <= 0)
+		{
+			UnityAction editBaseDelegate = delegate { ContentElementOnEdit(SelectedBase.QuestionDataBase); };
+			YesOrNo.SetFromChooseBaseBaseIsEmpty(SelectedBase.QuestionDataBase,editBaseDelegate);
 			UIManager.Instance.GoToView(YesOrNo);
 		}
 		else

@@ -14,7 +14,7 @@ public class AddBase : UIView
 	public Button AddBaseButton;
 
 	private Text pathText;
-	
+	private InputField FolderInputField;
 
 	private void Start()
 	{
@@ -44,13 +44,21 @@ public class AddBase : UIView
 		FileBrowserScript = fileBrowserObject.GetComponent<FileBrowser>();
 		FileBrowserScript.SetupFileBrowser(ViewMode.Portrait);
 		pathText = FileBrowserScript.UIScript.PathText.GetComponent<Text>();
+		FolderInputField = FileBrowserScript.UIScript.SaveFileTextInputFile;
 		FileBrowserScript.UIScript.SelectFileButton.GetComponent<Button>().onClick.RemoveAllListeners();
 		FileBrowserScript.UIScript.SelectFileButton.GetComponent<Button>().onClick.AddListener(OnPathSelected);
 	}
 
 	private void OnPathSelected()
 	{
-		QuestionDataBasePathText.text = pathText.text;
+		if (FolderInputField.text == "")
+		{
+			QuestionDataBasePathText.text = pathText.text;
+		}
+		else
+		{
+			QuestionDataBasePathText.text = pathText.text + "\\" + FolderInputField.text;
+		}
 		FileBrowserScript.CloseFileBrowser();
 	}
 
