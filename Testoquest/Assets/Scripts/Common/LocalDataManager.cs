@@ -1,16 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
+using UnityEngine;
 
 public static class LocalDataManager
 {
 	public static List<Question> GetQuestionsFromFolder(string folderPath)
 	{
 		List<Question> questions = new List<Question>();
+		UnityEngine.Debug.Log(folderPath);
 		Directory.CreateDirectory(folderPath);
 		string[] filePaths = Directory.GetFiles(folderPath,"pyt*.txt");
 		
@@ -71,6 +72,7 @@ public static class LocalDataManager
 		{
 			questionContentLines.Add(answer.AnswerText);
 		}
-		File.WriteAllLines(@dataBaseToEdit.Path + "/" + question.QuestionName + ".txt",questionContentLines);
+
+		File.WriteAllLines(@dataBaseToEdit.Path + "/" + question.QuestionName + ".txt", questionContentLines);
 	}
 }

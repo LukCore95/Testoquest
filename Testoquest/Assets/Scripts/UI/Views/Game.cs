@@ -90,6 +90,7 @@ public class Game : UIView
 		_questionRepeats.Clear();
 		_selectedQuestionDataBase = selectedQuestionDataBase;
 		_allQuestionRepeats = OptionsManager.Instance.StartingRepeatsPerQuestionsNumber * this._selectedQuestionDataBase.Questions.Count;
+		_goodAnswersNumber = _selectedQuestionDataBase.Questions.FindAll(question => question.IsAnswered).ToList().Count;
 		foreach (Question question in this._selectedQuestionDataBase.Questions)
 		{
 			if (!question.IsAnswered)

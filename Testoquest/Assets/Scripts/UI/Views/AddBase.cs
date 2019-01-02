@@ -57,7 +57,7 @@ public class AddBase : UIView
 		}
 		else
 		{
-			QuestionDataBasePathText.text = pathText.text + "\\" + FolderInputField.text;
+			QuestionDataBasePathText.text = pathText.text + "/" + FolderInputField.text;
 		}
 		FileBrowserScript.CloseFileBrowser();
 	}
