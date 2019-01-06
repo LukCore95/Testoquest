@@ -61,7 +61,7 @@ public class Game : UIView
 		{
 			_timer += Time.deltaTime;
 			_timeSpent = TimeSpan.FromSeconds(_timer);
-			TimeSpentText.text = _timeSpent.ToString();
+			TimeSpentText.text = _timeSpent.ToString("hh\\:mm\\:ss");
 		}
 	}
 
@@ -145,7 +145,7 @@ public class Game : UIView
 		while (_timerForAnswer > 0)
 		{
 			_timerForAnswer -= Time.deltaTime;
-			TimeForAnswerText.text = TimeSpan.FromSeconds(_timerForAnswer).ToString();
+			TimeForAnswerText.text = TimeSpan.FromSeconds(_timerForAnswer).ToString("hh\\:mm\\:ss");
 			yield return new WaitForFixedUpdate();
 		}
 		CheckAnswersPhase();
