@@ -96,10 +96,10 @@ TextureImporter:
       name: player_defense_0
       rect:
         serializedVersion: 2
-        x: 1
-        y: 82
-        width: 38
-        height: 38
+        x: 5
+        y: 410
+        width: 190
+        height: 190
       alignment: 6
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -116,10 +116,10 @@ TextureImporter:
       name: player_defense_1
       rect:
         serializedVersion: 2
-        x: 41
-        y: 82
-        width: 38
-        height: 38
+        x: 205
+        y: 410
+        width: 190
+        height: 190
       alignment: 6
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -136,10 +136,10 @@ TextureImporter:
       name: player_defense_2
       rect:
         serializedVersion: 2
-        x: 1
-        y: 42
-        width: 38
-        height: 38
+        x: 5
+        y: 210
+        width: 190
+        height: 190
       alignment: 6
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -156,10 +156,10 @@ TextureImporter:
       name: player_defense_3
       rect:
         serializedVersion: 2
-        x: 41
-        y: 42
-        width: 38
-        height: 38
+        x: 205
+        y: 210
+        width: 190
+        height: 190
       alignment: 6
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -176,10 +176,10 @@ TextureImporter:
       name: player_defense_4
       rect:
         serializedVersion: 2
-        x: 1
-        y: 2
-        width: 38
-        height: 38
+        x: 5
+        y: 10
+        width: 190
+        height: 190
       alignment: 6
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -196,10 +196,10 @@ TextureImporter:
       name: player_defense_5
       rect:
         serializedVersion: 2
-        x: 41
-        y: 2
-        width: 38
-        height: 38
+        x: 205
+        y: 10
+        width: 190
+        height: 190
       alignment: 6
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
