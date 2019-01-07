@@ -36,7 +36,7 @@ public class Background : MonoBehaviour
 	private void SoundToggle_OnValueChanged(bool value)
 	{
 		SoundOffImage.gameObject.SetActive(!value);
-		Camera.main.GetComponent<AudioListener>().enabled = value;
+		AudioManager.Instance.SetAudioSources(value);
 	}
 
 	private void GoToAboutApp()

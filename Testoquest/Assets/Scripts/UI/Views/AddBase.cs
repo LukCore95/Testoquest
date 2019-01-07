@@ -22,6 +22,18 @@ public class AddBase : UIView
 		AddBaseButton.onClick.AddListener(AddBaseButton_OnClicked);
 	}
 
+	private void Update()
+	{
+		if (QuestionDataBasePathText.text == "ścieżka do folderu pytań" || BaseNameInputField.text == "")
+		{
+			AddBaseButton.interactable = false;
+		}
+		else
+		{
+			AddBaseButton.interactable = true;
+		}
+	}
+
 	private void AddBaseButton_OnClicked()
 	{
 		if (BaseNameInputField.text.Length > 0)

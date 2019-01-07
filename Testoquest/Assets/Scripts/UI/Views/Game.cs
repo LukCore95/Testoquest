@@ -153,6 +153,10 @@ public class Game : UIView
 
 	private void CheckAnswersPhase()
 	{
+		foreach (AnswerScrollViewElement answer in _currentAnswerElements)
+		{
+			answer.AnswerToggle.interactable = false;
+		}
 		StopAllCoroutines();
 		int numberOfAnswers = _currentQuestion.Answers.Count;
 		int numberOfMatchedAnswers = 0;
