@@ -119,4 +119,20 @@ public static class PlayerPrefsManager
 		OptionsManager.Instance.TimeForAnswer = TimeSpan.ParseExact(PlayerPrefs.GetString("TimeForAnswer"),@"mm\:ss", CultureInfo.CurrentCulture, TimeSpanStyles.None);
 		OptionsManager.Instance.LearnWithoutGame = Convert.ToBoolean(PlayerPrefs.GetInt("LearnWithoutGame"));
 	}
+
+	public static void SetOptionsForFirstLaunch()
+	{
+		if (!PlayerPrefs.HasKey("MusicVolume"))
+		{
+			PlayerPrefs.SetFloat("MusicVolume", 1);
+			PlayerPrefs.SetFloat("SoundVolume", 1);
+			PlayerPrefs.SetInt("Vibrations", 1);
+			PlayerPrefs.SetInt("Repeats", 3);
+			PlayerPrefs.SetInt("StartingRepeats", 3);
+			PlayerPrefs.SetString("TimeForAnswer", "01:00");
+			PlayerPrefs.SetInt("LearnWithoutGame", 0);
+			SetOptionsFromPlayerPrefs();
+			PlayerPrefs.Save();
+		}
+	}
 }

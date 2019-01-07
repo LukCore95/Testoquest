@@ -13,7 +13,7 @@ public class OptionsManager : Singleton<OptionsManager>
 		set
 		{
 			_musicVolume = value;
-			//AudioMixer set
+			AudioManager.Instance.SetMusicVolume(_musicVolume);
 		}
 	}
 
@@ -23,7 +23,7 @@ public class OptionsManager : Singleton<OptionsManager>
 		set
 		{
 			_soundVolume = value;
-			//AudioMixer set
+			AudioManager.Instance.SetSoundVolume(_soundVolume);
 		}
 	}
 
@@ -90,5 +90,10 @@ public class OptionsManager : Singleton<OptionsManager>
 		optionsUI.StartingRepeatQuestionsInputField.text = StartingRepeatsPerQuestionsNumber.ToString();
 		optionsUI.TimeForAnswerImInputField.text = TimeForAnswer.ToString(@"mm\:ss");
 		optionsUI.LearnWithoutGameToggle.isOn = LearnWithoutGame;
+	}
+
+	public static void CheckIfFirstTime()
+	{
+		PlayerPrefsManager.SetOptionsForFirstLaunch();
 	}
 }

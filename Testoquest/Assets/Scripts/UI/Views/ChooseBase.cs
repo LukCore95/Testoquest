@@ -27,6 +27,7 @@ public class ChooseBase : UIView
 
 	public override void OnEnable()
 	{
+		SelectedBase = null;
 		UIManager.Instance.Background.DisableAll();
 		UIManager.Instance.Background.BackButton.gameObject.SetActive(true);
 		UIManager.Instance.Background.SetBackButtonListener(UIManager.Instance.GoBack);

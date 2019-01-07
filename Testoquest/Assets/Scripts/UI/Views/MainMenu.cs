@@ -15,6 +15,7 @@ public class MainMenu : UIView
 	private void Start()
 	{
 		UIManager.Instance.GoToView(this);
+		OptionsManager.CheckIfFirstTime();
 		_startButton.onClick.AddListener(GoToChooseQuestionBase);
 		_optionsButton.onClick.AddListener(GoToOptions);
 		_closeButton.onClick.AddListener(GoToExit);
