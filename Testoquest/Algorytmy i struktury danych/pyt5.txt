@@ -1,0 +1,6 @@
+X0101
+Wymień rodzaje list
+Łatwe i trudne
+proste i cykliczne
+Duże i małe 
+Jednokierunkowe i dwukierunkowe

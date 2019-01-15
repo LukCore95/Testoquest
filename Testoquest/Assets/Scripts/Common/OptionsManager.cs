@@ -13,7 +13,7 @@ public class OptionsManager : Singleton<OptionsManager>
 		set
 		{
 			_musicVolume = value;
-			AudioManager.Instance.SetMusicVolume(_musicVolume);
+			AudioManager.Instance.SetMusicVolume(_musicVolume/2f);
 		}
 	}
 

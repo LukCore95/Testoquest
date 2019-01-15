@@ -235,8 +235,9 @@ public class Game : UIView
 	private void UpdateProgress()
 	{
 		_selectedQuestionDataBase.TimeSpent = TimeSpan.Parse(TimeSpentText.text,CultureInfo.CurrentCulture);
+		int index = QuestionDataBaseManager.Instance.QuestionDataBaseNames.FindIndex(name => name == _selectedQuestionDataBase.Name);
 		//selectedQuestionDataBase.TimeSpent = TimeSpan.ParseExact(TimeSpentText.text,@"hh\:mm\:ss", CultureInfo.CurrentCulture, TimeSpanStyles.None);
-		PlayerPrefsManager.SaveQuestionDataBaseTimeSpent(_selectedQuestionDataBase.Name,TimeSpentText.text);
+		PlayerPrefsManager.SaveQuestionDataBaseTimeSpent(index, TimeSpentText.text);
 
 
 		EnemyHPSlider.value = 1 - _goodAnswersNumber / _allQuestionRepeats;
@@ -247,7 +248,8 @@ public class Game : UIView
 
 	private void SaveAndGoBack()
 	{
-		PlayerPrefsManager.SaveQuestionDataBaseTimeSpent(_selectedQuestionDataBase.Name,TimeSpentText.text);
+		int index = QuestionDataBaseManager.Instance.QuestionDataBaseNames.FindIndex(name => name == _selectedQuestionDataBase.Name);
+		PlayerPrefsManager.SaveQuestionDataBaseTimeSpent(index, TimeSpentText.text);
 		UIManager.Instance.GoBack();
 	}
 }

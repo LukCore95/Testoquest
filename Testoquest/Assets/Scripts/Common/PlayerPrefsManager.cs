@@ -7,20 +7,20 @@ using UnityEngine.UI;
 
 public static class PlayerPrefsManager
 {
-	public static void SaveQuestionDataBasePath(string dataBasePath,string dataBaseName)
+	public static void SaveQuestionDataBasePath(string dataBasePath, int index)
 	{
-		PlayerPrefs.SetString(dataBaseName + "_Path",dataBasePath);
+		PlayerPrefs.SetString("QuestionDataBase" + index + "_Path",dataBasePath);
 		PlayerPrefs.Save();
 	}
 
-	public static string GetQuestionDataBasePath(string dataBaseName)
+	public static string GetQuestionDataBasePath(int index)
 	{
-		return PlayerPrefs.GetString(dataBaseName + "_Path");
+		return PlayerPrefs.GetString("QuestionDataBase" + index + "_Path");
 	}
 
-	public static void DeleteQuestionDataBasePath(string dataBaseName)
+	public static void DeleteQuestionDataBasePath(int index)
 	{
-		PlayerPrefs.DeleteKey(dataBaseName + "_Path");
+		PlayerPrefs.DeleteKey("QuestionDataBase" + index + "_Path");
 		PlayerPrefs.Save();
 	}
 
@@ -46,52 +46,52 @@ public static class PlayerPrefsManager
 		PlayerPrefs.Save();
 	}
 
-	public static TimeSpan GetQuestionDataBaseTimeSpent(string dataBaseName)
+	public static TimeSpan GetQuestionDataBaseTimeSpent(int index)
 	{
-		string str = PlayerPrefs.GetString(dataBaseName + "_TimeSpent", "00:00:00");
-		return TimeSpan.Parse(PlayerPrefs.GetString(dataBaseName+"_TimeSpent", "00:00:00"),CultureInfo.CurrentCulture);
+		string str = PlayerPrefs.GetString("QuestionDataBase" + index + "_TimeSpent", "00:00:00");
+		return TimeSpan.Parse(PlayerPrefs.GetString("QuestionDataBase" + index + "_TimeSpent", "00:00:00"),CultureInfo.CurrentCulture);
 	}
 
-	public static void SaveQuestionDataBaseTimeSpent(string dataBaseName, string timeSpent)
+	public static void SaveQuestionDataBaseTimeSpent(int index, string timeSpent)
 	{
-		PlayerPrefs.SetString(dataBaseName+"_TimeSpent",timeSpent);
+		PlayerPrefs.SetString("QuestionDataBase" + index + "_TimeSpent",timeSpent);
 		PlayerPrefs.Save();
 	}
 	
-	public static void DeleteQuestionDataBaseTimeSpent(string dataBaseName)
+	public static void DeleteQuestionDataBaseTimeSpent(int index)
 	{
-		PlayerPrefs.DeleteKey(dataBaseName+"_TimeSpent");
+		PlayerPrefs.DeleteKey("QuestionDataBase" + index + "_TimeSpent");
 		PlayerPrefs.Save();
 	}
 
-	public static void SaveQuestionDataBaseState(QuestionDataBase dataBaseToSave)
+	public static void SaveQuestionDataBaseState(QuestionDataBase dataBaseToSave, int index)
 	{
 		foreach (Question question in dataBaseToSave.Questions)
 		{
-			string key = dataBaseToSave.Name + "_" + question.QuestionName;
+			string key = "QuestionDataBase" + index + "_" + question.QuestionName;
 			int value = Convert.ToInt32(question.IsAnswered);
 			PlayerPrefs.SetInt(key,value);
 		}
 		PlayerPrefs.Save();
 	}
 
-	public static void SaveQuestionState(QuestionDataBase dataBase, Question question)
+	public static void SaveQuestionState(int index, Question question)
 	{
-		string key = dataBase.Name + "_" + question.QuestionName;
+		string key = "QuestionDataBase" + index + "_" + question.QuestionName;
 		int value = Convert.ToInt32(question.IsAnswered);
 		PlayerPrefs.SetInt(key,value);
 		PlayerPrefs.Save();
 	}
 
-	public static bool GetQuestionState(string dataBaseName, Question question)
+	public static bool GetQuestionState(int index, Question question)
 	{
-		string key = dataBaseName + "_" + question.QuestionName;
+		string key = "QuestionDataBase" + index + "_" + question.QuestionName;
 		return Convert.ToBoolean(PlayerPrefs.GetInt(key,0));
 	}
 
-	public static void DeleteQuestionState(QuestionDataBase dataBase, Question question)
+	public static void DeleteQuestionState(int index, Question question)
 	{
-		string key = dataBase.Name + "_" + question.QuestionName;
+		string key = "QuestionDataBase" + index + "_" + question.QuestionName;
 		PlayerPrefs.DeleteKey(key);
 		PlayerPrefs.Save();
 	}

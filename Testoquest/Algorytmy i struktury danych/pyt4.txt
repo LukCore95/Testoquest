@@ -1,0 +1,6 @@
+X0010
+4. Skrót FIFO oznacza:
+First In Falls Out
+Fall In Fall Out
+First In First Out
+Fill In Fill Out

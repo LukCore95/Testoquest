@@ -31,17 +31,19 @@ public class QuestionDataBaseManager : Singleton<QuestionDataBaseManager>
 	private void UpdateQuestionDataBases()
 	{
 		QuestionDataBases.Clear();
-		foreach (string questionDataBaseName in QuestionDataBaseNames)
+		for (var index = 0; index < QuestionDataBaseNames.Count; index++)
 		{
+			string questionDataBaseName = QuestionDataBaseNames[index];
 			QuestionDataBase newBase = new QuestionDataBase();
 			newBase.Name = questionDataBaseName;
-			newBase.Path = PlayerPrefsManager.GetQuestionDataBasePath(newBase.Name);
-			newBase.TimeSpent = PlayerPrefsManager.GetQuestionDataBaseTimeSpent(newBase.Name);
+			newBase.Path = PlayerPrefsManager.GetQuestionDataBasePath(index);
+			newBase.TimeSpent = PlayerPrefsManager.GetQuestionDataBaseTimeSpent(index);
 			newBase.Questions = LocalDataManager.GetQuestionsFromFolder(newBase.Path);
 			foreach (Question question in newBase.Questions)
 			{
-				question.IsAnswered = PlayerPrefsManager.GetQuestionState(questionDataBaseName,question);
+				question.IsAnswered = PlayerPrefsManager.GetQuestionState(index, question);
 			}
+
 			QuestionDataBases.Add(newBase);
 		}
 	}
@@ -53,9 +55,8 @@ public class QuestionDataBaseManager : Singleton<QuestionDataBaseManager>
 		{
 			index++;
 		}
-
 		PlayerPrefsManager.SaveQuestionDataBaseNameToPlayerPrefs(index,dataBaseName);
-		PlayerPrefsManager.SaveQuestionDataBasePath(questionDataBasePath,dataBaseName);
+		PlayerPrefsManager.SaveQuestionDataBasePath(questionDataBasePath,index);
 		UpdateQuestionDataBaseNames();
 		UpdateQuestionDataBases();
 	}
@@ -63,38 +64,52 @@ public class QuestionDataBaseManager : Singleton<QuestionDataBaseManager>
 	public void DeleteDataBase(string dataBaseName)
 	{
 		int index = QuestionDataBaseNames.FindIndex(name => name == dataBaseName);
+		int iterations = QuestionDataBaseNames.Count;
+		QuestionDataBase database = QuestionDataBases.Find(_database => _database.Name == dataBaseName);
+		foreach (Question question in database.Questions)
+		{
+			PlayerPrefsManager.DeleteQuestionState(index, question);
+		}
 		PlayerPrefsManager.DeleteQuestionDataBaseName(index);
-		PlayerPrefsManager.DeleteQuestionDataBasePath(dataBaseName);
-		PlayerPrefsManager.DeleteQuestionDataBaseTimeSpent(dataBaseName);
+		PlayerPrefsManager.DeleteQuestionDataBasePath(index);
+		PlayerPrefsManager.DeleteQuestionDataBaseTimeSpent(index);
 		QuestionDataBaseNames.Remove(dataBaseName);
-		RefreshDataBases();
+		RefreshDataBases(iterations);
 	}
 
 	public void ResetDataBaseState(string dataBaseName)
 	{
 		QuestionDataBase dataBase = QuestionDataBases.Find(database => database.Name == dataBaseName);
+		int index = QuestionDataBaseNames.FindIndex(name => name == dataBaseName);
 		dataBase.TimeSpent = new TimeSpan();
 		foreach (Question question in dataBase.Questions)
 		{
 			question.IsAnswered = false;
-			PlayerPrefsManager.SaveQuestionState(dataBase,question);
+			PlayerPrefsManager.SaveQuestionState(index, question);
 		}
-		PlayerPrefsManager.SaveQuestionDataBaseState(dataBase);
-		PlayerPrefsManager.SaveQuestionDataBaseTimeSpent(dataBaseName,dataBase.TimeSpent.ToString());
+		PlayerPrefsManager.SaveQuestionDataBaseState(dataBase, index);
+		PlayerPrefsManager.SaveQuestionDataBaseTimeSpent(index, dataBase.TimeSpent.ToString());
 	}
 
-	private void RefreshDataBases()
+	private void RefreshDataBases(int iterations)
 	{
 		int index = 0;
-		while (PlayerPrefsManager.CheckQuestionDataBaseNameFromPlayerPrefs(index))
+		for (var i = 0; i < iterations; i++)
 		{
-			PlayerPrefsManager.DeleteQuestionDataBaseName(index);
-			index++;
+			if (PlayerPrefsManager.CheckQuestionDataBaseNameFromPlayerPrefs(i))
+			{
+				index++;
+				PlayerPrefsManager.DeleteQuestionDataBaseName(i);
+				PlayerPrefsManager.DeleteQuestionDataBasePath(i);
+			}
 		}
 
 		for (var i= 0; i < QuestionDataBaseNames.Count; i++)
 		{
-			PlayerPrefsManager.SaveQuestionDataBaseNameToPlayerPrefs(i, QuestionDataBaseNames[i]);
+			string dataBaseName = QuestionDataBaseNames[i];
+			QuestionDataBase database = QuestionDataBases.Find(_database => _database.Name == dataBaseName);
+			PlayerPrefsManager.SaveQuestionDataBaseNameToPlayerPrefs(i, dataBaseName);
+			PlayerPrefsManager.SaveQuestionDataBasePath(database.Path, i);
 		}
 
 		UpdateQuestionDataBases();
@@ -104,19 +119,21 @@ public class QuestionDataBaseManager : Singleton<QuestionDataBaseManager>
 	{
 		Question _answeredQuestion =
 			DataBase.Questions.First(question => question.QuestionName == updatedAnsweredQuestion.QuestionName);
+		int index = QuestionDataBaseNames.FindIndex(name => name == DataBase.Name);
 		_answeredQuestion = updatedAnsweredQuestion;
-		PlayerPrefsManager.SaveQuestionState(DataBase,_answeredQuestion);
+		PlayerPrefsManager.SaveQuestionState(index, _answeredQuestion);
 	}
 
 	public void DeleteQuestionFromDatabase(string dataBaseName, string questionQuestionName)
 	{
 		QuestionDataBase dataBase = QuestionDataBases.Find(database => database.Name == dataBaseName);
 		Question question = dataBase.Questions.First(q => q.QuestionName == questionQuestionName);
+		int index = QuestionDataBaseNames.FindIndex(name => name == dataBase.Name);
 
 		if (question != null)
 		{
 			LocalDataManager.DeleteQuestion(dataBase, question);
-			PlayerPrefsManager.DeleteQuestionState(dataBase,question);
+			PlayerPrefsManager.DeleteQuestionState(index, question);
 			dataBase.Questions.Remove(question);
 		}
 	}
@@ -124,6 +141,7 @@ public class QuestionDataBaseManager : Singleton<QuestionDataBaseManager>
 	public void AddNewQuestion(QuestionDataBase dataBase, Question newQuestion)
 	{
 		QuestionDataBase dataBaseToEdit = QuestionDataBases.Find(dbase => dbase.Name == dataBase.Name);
+		int index = QuestionDataBaseNames.FindIndex(name => name == dataBaseToEdit.Name);
 
 		if (dataBaseToEdit.Questions.Exists(q => q.QuestionName == newQuestion.QuestionName))
 		{
@@ -135,7 +153,7 @@ public class QuestionDataBaseManager : Singleton<QuestionDataBaseManager>
 			dataBaseToEdit.Questions.Add(newQuestion);
 		}
 
-		PlayerPrefsManager.SaveQuestionState(dataBaseToEdit,newQuestion);
+		PlayerPrefsManager.SaveQuestionState(index, newQuestion);
 		LocalDataManager.SaveQuestion(dataBaseToEdit, newQuestion);
 	}
 }
